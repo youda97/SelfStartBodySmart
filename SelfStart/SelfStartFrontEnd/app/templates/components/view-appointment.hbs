@@ -1,0 +1,31 @@
+<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/form-style.css"> <!-- Resource style -->
+<br><br><br><br><br><br>
+{{#if isEditing}}
+  <form class="cd-form floating-labels" {{action "save" on="submit"}}>
+    <br><br>
+    <fieldset>
+      <legend>Book Appointment</legend>
+
+
+      <label class="cd-label">Select Client</label>
+      <p class="cd-select icon">
+        <select class="people" value ={{selectclient}} onchange={{action "updateValue" value="target.value"}} >
+          <option value=""  selected disabled hidden>Select patient</option>
+          {{#each getclient as |client|}}
+            <option value={{client.id}}>
+              {{client.familyName}}
+            </option>
+          {{/each}}
+        </select>
+      </p>
+
+
+
+    </fieldset>
+  </form>
+{{else}}
+  <button class="ui button" {{action 'bookAppointment'}}>
+    Book appointment
+  </button>
+
+{{/if}}

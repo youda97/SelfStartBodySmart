@@ -1,0 +1,83 @@
+<p style="cursor: pointer; " title="Edit"  {{action 'openModal' }}>
+  <img src="/assets/images/pencil.svg">
+</p>
+
+
+{{#ui-modal name=modalName class=modalName }}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+
+
+  <div class="header">Edit Practitioner</div>
+  <div class="scrolling content" >
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <legend>Personal Info</legend>
+
+      <div class="ui hidden divider"></div>
+      <div class="ui two column grid">
+        <div class="column " style="margin: 1em 0;">
+          <label class="cd-label">First Name</label>
+          {{input class="user" type="text" value = physiosData.givenName required = true}}
+        </div>
+        <div class="column " style="margin: 1em 0;">
+          <label class="cd-label">Last Name</label>
+          {{input class="user" type="text" value = physiosData.familyName required = true}}
+        </div>
+      </div>
+
+      <div class="ui two column grid">
+        <div class="column " style="margin: 1em 0;">
+          <label class="cd-label">Date Hired</label>
+          <input class="date" type="date" value= {{selectedHiredDate}}  onchange={{action 'assignHiredDate' value="target.value"}} required>
+        </div>
+
+        <div class="column " style="margin: 1em 0;">
+          <h4>Gender</h4>
+
+          {{#ui-dropdown class="gender selection" onChange=(action (mut gender))}}
+            <div class="default text" style="color: black;">{{gender}}</div>
+            <i class="dropdown icon" id="selectIcon"></i>
+            <div class="menu">
+              {{#each genderModel as |oneGender|}}
+                <div data-value="{{oneGender.name}}" class="item">
+                  {{oneGender.name}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+
+        </div>
+      </div>
+
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <legend>Contact Info</legend>
+      <div class="ui hidden divider"></div>
+
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label" for="cd-name">Phone Number</label>
+        {{input class="phone" type="text" value = physiosData.phoneNumber required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label" for="cd-email">Email</label>
+        {{input class="email" type="email" value = physiosData.email required = true}}
+
+      </div>
+
+      <div class="field">
+        <button class="fluid ui blue button" value="submit" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+{{/ui-modal}}

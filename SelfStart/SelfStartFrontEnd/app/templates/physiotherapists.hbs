@@ -1,0 +1,43 @@
+<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/table-style.css"> <!-- Resource style -->
+
+
+<br><br><br><br>
+
+<section id="cd-section">
+
+  <section id="cd-table">
+    <div class="cd-table-container">
+      <ul>
+        <li style="  text-align: center; font-size: 1.2rem; text-transform: uppercase;
+                          font-weight: bold; color: white; background-color: #f58b4c;">Physiotherapists</li>
+        {{#each model as |physiotherapest|}}
+
+          <li>{{physiotherapest.givenName}} {{physiotherapest.familyName}}
+            <p style="float: right;">{{delete-physiotherapist ID=physiotherapest.id}}</p>
+
+            <p style="float: right; padding-right: 2%; cursor: pointer;" title="Edit">
+              {{#link-to 'update-physiotherapist' physiotherapest.id}}
+                <i class="grey write icon"></i>
+              {{/link-to}}
+            </p>
+
+
+          </li>
+
+        {{/each}}
+      </ul>
+    </div>
+
+
+  </section> <!-- cd-table -->
+
+</section>
+
+
+<div id="add" class="container">
+  {{#link-to 'new-physiotherapist'}}
+    <a id="add" class="round-button">
+      <i class="plus icon"></i>
+    </a>
+  {{/link-to}}
+</div>

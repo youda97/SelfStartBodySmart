@@ -1,0 +1,32 @@
+<div id="content">
+  {{add-exercises}}
+  <br><br>
+  <table class="ui single line table">
+
+    <thead>
+    <tr>
+      <th>Exercise Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each model.exercise as |Exercise|}}
+      <tr>
+        <td>{{Exercise.name}}</td>
+        <td>{{Exercise.description}}</td>
+        <td>
+          <div class="four wide column right aligned">
+            {{edit-exercises ID=Exercise.id images=Exercise.images}}
+          </div>
+          <div class="four wide column left aligned">
+            {{delete-exercises ID=Exercise.id}}
+          </div>
+        </td>
+      </tr>
+    {{/each}}
+    </tbody>
+
+  </table>
+</div>

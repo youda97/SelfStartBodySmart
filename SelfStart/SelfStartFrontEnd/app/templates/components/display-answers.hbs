@@ -1,0 +1,71 @@
+
+{{#if question.sa}}
+  <div class="field" style="margin: 1em 0;">
+    <label class="cd-label">{{question.questionText}}</label>
+    {{input class="disabled message" type="text" value = SAanswer required = true}}
+  </div>
+{{/if}}
+
+{{#if question.ra}}
+  <div class="field" style="margin: 1em 0;">
+    <label class="cd-label">{{question.questionText}}</label>
+    {{ui-rating
+      class="ui massive star rating"
+      initialRating = Rating
+      maxRating=10
+      interactive = false}}
+  </div>
+{{/if}}
+
+
+{{#if question.tf}}
+  <div class="field" style="margin: 1em 0;">
+    <h4>{{question.questionText}}</h4>
+
+    <div class="field">
+      {{ui-checkbox label="Yes" checked=checkTrue disabled = true}}
+    </div>
+
+    <div class="field">
+      {{ui-checkbox label="No" checked=checkFalse disabled = true }}
+    </div>
+
+  </div>
+{{/if}}
+{{#if question.mc}}
+  <div class="ui form" style="margin: 1em 0;">
+
+    <h4>{{question.questionText}}</h4>
+    <ul class="cd-form-list">
+      <li>
+        {{ui-checkbox label=mcop1 checked=checkmcop1 disabled = true }}
+      </li>
+
+      <li>
+        {{ui-checkbox label=mcop2 checked=checkmcop2 disabled = true }}
+      </li>
+
+      <li>
+        {{ui-checkbox label=mcop3 checked=checkmcop3 disabled = true }}
+      </li>
+
+
+      {{#if (number-of-mc question.optionNumber 3)}}
+        <li>
+          {{ui-checkbox label=mcop4 checked=checkmcop4 disabled = true }}
+        </li>
+      {{/if}}
+      {{#if (number-of-mc question.optionNumber 4)}}
+        <li>
+          {{ui-checkbox label=mcop5 checked=checkmcop5 disabled = true }}
+        </li>
+      {{/if}}
+      {{#if (number-of-mc question.optionNumber 5)}}
+        <li>
+          {{ui-checkbox label=mcop6 checked=checkmcop6 disabled = true }}
+        </li>
+      {{/if}}
+
+    </ul>
+  </div>
+{{/if}}

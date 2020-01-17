@@ -1,0 +1,275 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Settings</span>
+      </h1>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+  <div class="ui bottom attached segment pushable">
+  <div class="ui visible inverted left vertical sidebar menu">
+    <a class="item" {{action "ProfileClick"}}  style=  {{OPC}}>
+      <i class="file icon"></i>
+      Profile
+    </a>
+    <a class="item" {{action "settingsClick"}} style=  {{OAC}}>
+      <i class="cog icon"></i>
+      Account
+    </a>
+    <a class="item"{{action "historyClick"}}  style=  {{OHC}}>
+      <i class="calendar icon"></i>
+      Transaction History
+    </a>
+    <a class="item"{{action "appointmentClick"}}  style=  {{OAPC}}>
+      <i class="book icon"></i>
+      Appointment History
+    </a>
+    <!--<a class="item">-->
+      <!--<i class="calendar icon"></i>-->
+      <!--History-->
+    <!--</a>-->
+  </div>
+  <div class="pusher" style="height: 100%;">
+    <form class="cd-form floating-labels"  style="padding-right: 10em;">
+      {{#if onProfile}}
+        <div class="ui basic segment">
+          <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+          <legend>Personal Info</legend>
+          <div class="ui hidden divider"></div>
+          <div class="ui two column grid">
+            <div class="five wide column " style="margin: 1em 0;">
+              <label class="cd-label">First Name</label>
+              {{input class="user" type="text" value = pateintsData.givenName required = true}}
+            </div>
+            <div class="five wide column " style="margin: 1em 0;">
+              <label class="cd-label">Last Name</label>
+              {{input class="user" type="text" value = pateintsData.familyName required = true}}
+            </div>
+          </div>
+          <div class="ui two column grid">
+            <div class="four wide column " style="margin: 1em 0;">
+              <label class="cd-label">Date of Birth</label>
+              <input class="date" type="date" value= {{selectedDate}}  onchange={{action 'assignDate' value="target.value"}} required>
+            </div>
+
+            <div class="four wide column " style="margin: 1em 0;">
+              <h4>Gender</h4>
+              <p class="cd-select icon">
+                <select class="people" onchange={{action 'selectGender' value="target.value"}}>
+                  {{#each genderModel as |oneGender|}}
+                    <option value={{oneGender.name}} selected={{eq pateintsData.gender oneGender.name}}>
+                      {{oneGender.name}}
+                    </option>
+                  {{/each}}
+                </select>
+              </p>
+            </div>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+
+          <legend>Address</legend>
+          <div class="ui hidden divider"></div>
+
+
+          <div class="ui two column grid">
+            <div class="four wide column " style="margin: 1em 0;">        <label class="cd-label">Number</label>
+              {{input class="home" type="text" value = pateintsData.streetNumber required = true}}
+            </div>
+            <div class="four wide column " style="margin: 1em 0;">
+              <label class="cd-label">Street Name</label>
+              {{input class="home" type="text" value = pateintsData.streetName required = true}}
+            </div>
+          </div>
+
+          <div class="ui two column grid">
+            <div class="four wide column " style="margin: 1em 0;">        <label class="cd-label" for="cd-name">Unit</label>
+              {{input class="bookmark" type="text" value = pateintsData.apartment}}
+            </div>
+
+            <div class="four wide column " style="margin: 1em 0;">
+              <label class="cd-label" for="cd-name">Postal/ZIP Code</label>
+              {{input class="flag" type="text" value = pateintsData.postalCode required = true}}
+            </div>
+          </div>
+
+          <div class="ui three column grid" id="grid">
+            <div class="four wide column " style="margin: 1em 0;">
+              <h4>Country</h4>
+              <p class="cd-select icon">
+                <select class="world" onchange={{action 'selectCountry' value="target.value"}}>
+                  {{#each conutryModel as |oneCountry|}}
+                    <option value={{oneCountry.name}} selected={{eq pateintsData.country oneCountry.name}}>
+                      {{oneCountry.name}}
+                    </option>
+                  {{/each}}
+                </select>
+              </p>
+            </div>
+            <div class="four wide column " style="margin: 1em 0;">
+              <h4>Province</h4>
+              {{input class="world" type="text" value = pateintsData.province placeholder="Province/State" required = true}}
+            </div>
+            <div class="four wide column " style="margin: 1em 0;">
+              <h4>City</h4>
+              {{input class="world" type="text" value = pateintsData.city placeholder="City" required = true}}
+            </div>
+          </div>
+
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+
+          <legend>Contact Info</legend>
+          <div class="ui hidden divider"></div>
+
+          <div class="ui two column grid">
+            <div class="five wide column" style="margin: 1em 0;">
+              <label class="cd-label" for="cd-name">Phone Number</label>
+              {{input class="phone" type="text" value = pateintsData.phoneNumber required = true}}
+            </div>
+
+          </div>
+
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+
+          <div class="three wide field">
+            <button class="fluid ui blue button" style="height: 50px;" {{action "saveChange"}}>
+              Save Changes
+            </button>
+          </div>
+
+      </div>
+      {{/if}}
+      {{#if onAccount}}
+        <div class="ui basic segment">
+          <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+          <legend>Change Password</legend>
+          <div class="ui one column grid">
+          <div class="five wide column " style="margin: 1em 0;">
+            <label class="cd-label">Old Password</label>
+            {{input class="user" type="password" value = oldPassword required = true}}
+          </div>
+          </div>
+          <div class="ui one column grid">
+          <div class="five wide column " style="margin: 1em 0;">
+            <label class="cd-label">New Password</label>
+            {{input class="user" type="password" value = newPassword required = true}}
+          </div>
+          </div>
+          <div class="ui one column grid">
+          <div class="five wide column " style="margin: 1em 0;">
+            <label class="cd-label">Confirm Password</label>
+            {{input class="user" type="password" value = confirmPassword required = true}}
+          </div>
+          </div>
+          <div class="ui hidden divider"></div>
+
+          <div class="three wide field">
+            <button class="fluid ui blue button" style="height: 50px;" {{action "savePassword"}}>
+              Save Changes
+            </button>
+          </div>
+
+        </div>
+      {{/if}}
+      {{#if onHistory}}
+        <div class="ui container segment" id="top" style="margin-left: 0% !important;">
+          <div class="ui grid">
+            <div class="left thirteen wide column" style="margin-top: -5px;">
+              <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+                Transaction History
+              </p>
+            </div>
+          </div>
+          <br><br><br><br>
+
+          <div style="display: inline">
+            <table class="ui fixed table" style="border: none;border-color: white;">
+              <tbody >
+              <tr style="font-weight: bold;">
+                <th>Date</th>
+                <th>Price</th>
+                <th>Type</th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div  id="clientWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+
+            <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+              <tbody >
+              {{#each pateintsData.transactions as |transaction|}}
+                <tr>
+                  <td>{{transaction.date}}</td>
+                  <td>{{transaction.amount}}</td>
+                  <td>{{transaction.package}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br><br><br><br>
+      {{/if}}
+      {{#if onAppointment}}
+      <div class="ui container segment" id="top" style="margin-left: 0% !important;">
+        <div class="ui grid">
+          <div class="left thirteen wide column" style="margin-top: -5px;">
+            <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+              Appointment History
+            </p>
+          </div>
+        </div>
+        <br><br><br><br>
+
+        <div style="display: inline">
+          <table class="ui fixed table" style="border: none;border-color: white;">
+            <tbody >
+            <tr style="font-weight: bold;">
+              <th>Date</th>
+              <th>Practitioner</th>
+              <th>Reason</th>
+              <th>Appointment type</th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div  id="clientWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+
+          <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+            <tbody >
+            {{#each appointmentHistory as |aHistory|}}
+              <tr>
+                <td>{{aHistory.date}}</td>
+                <td>{{aHistory.pName}}</td>
+                <td>{{aHistory.reason}}</td>
+                <td>{{types-appointment aHistory.date aHistory.endDate}}</td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br><br><br><br>
+
+      {{/if}}
+
+    <br>
+    <br>
+    </form>
+  </div>
+  </div>
+

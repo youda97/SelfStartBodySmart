@@ -1,0 +1,262 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Configure Settings</span>
+      </h1>
+
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+<div class="ui centered cards" >
+  <div class="card" style="width:200px">
+    <div class="content">
+      <div class="header">Countries</div>
+    </div>
+    <div class="ui bottom attached button"  {{action "countrySelect"}}>
+      <i class="add icon"></i>Add Country
+    </div>
+  </div>
+
+  <div class="card" style="width:200px">
+    <div class="content">
+      <div class="header">Provinces</div>
+    </div>
+    <div class="ui bottom attached button" {{action "provinceSelect"}}>
+      <i class="add icon"></i>
+      Add Province
+    </div>
+  </div>
+
+  <div class="card" style="width:200px">
+    <div class="content">
+      <div class="header">Genders</div>
+    </div>
+    <div class="ui bottom attached button" {{action "genderSelect"}}>
+      <i class="add icon"></i>Add Gender
+    </div>
+  </div>
+
+  <div class="card" style="width:200px">
+    <div class="content">
+      <div class="header">Client Quote</div>
+    </div>
+    <div class="ui bottom attached button" {{action "quoteSelect"}}>
+      <i class="add icon"></i>Add quote
+    </div>
+  </div>
+
+</div>
+
+
+<br>
+
+{{#if genderSelected}}
+
+  <div class="ui very padded container segment" id="top" style="padding-bottom: 1em;">
+    <div class="ui grid" style="margin-top: -30px;">
+      <div class="left thirteen wide column" style="margin-top: -5px;">
+        <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">Genders</p>
+      </div>
+      <div class="right two wide column" style="padding-left: 50px;">
+        {{add-gender genderAdd=genderAdd}}
+      </div>
+    </div>
+    <br><br><br><br>
+
+
+    <table class="ui fixed table" id="tb" style="border: none;border-color: white;">
+      <tbody>
+      <tr style="font-weight: bold;">
+        <td class="left aligned fourteen wide column">Name</td>
+        <td class="center aligned two wide column">Actions</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="ui divider"></div>
+
+
+    <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+      <tbody >
+      {{#each model.gender as |gender|}}
+        <tr>
+          <td class="left aligned fourteen wide column">
+            {{gender.name}}
+          </td>
+          <td class="right aligned one wide column">
+            <p>{{edit-gender ID=gender.id}}</p>
+          </td>
+          <td class="left aligned one wide column">
+            <p>{{delete-gender ID=gender.id genderDelete=genderDelete}}</p>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+{{/if}}
+
+{{#if countrySelected}}
+  <div class="ui very padded container segment" id="top" style="padding-bottom: 1em;">
+    <div class="ui grid" style="margin-top: -30px;">
+      <div class="left thirteen wide column" style="margin-top: -5px;">
+        <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">Countries</p>
+      </div>
+      <div class="right two wide column" style="padding-left: 50px;">
+        {{add-country countryAdd=countryAdd}}
+      </div>
+    </div>
+    <br><br><br><br>
+
+    <div class="ui left aligned seven wide column">
+      <div class="ui form" >
+        <div class="two fields" >
+
+          <div class="field">
+            {{#ui-dropdown class="selection" selected=queryPath onChange=(action (mut queryPath))}}
+              <div class="default text">{{modelAttributes.firstObject.name}}</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                {{#each modelAttributes as |attribute|}}
+                  <div class="item" data-value="{{attribute.key}}">
+                    {{attribute.name}}
+                  </div>
+                {{/each}}
+              </div>
+            {{/ui-dropdown}}
+          </div>
+
+          <div class="field">
+            <div class="ui icon input">
+              <i class="search icon"></i>
+              {{input type="text" placeholder="Search..."  value=query }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: inline">
+      <table class="ui fixed table" style="border: none;border-color: white;">
+        <tbody>
+        <tr style="font-weight: bold;">
+          {{#each modelAttributes as |column|}}
+            <th class={{column.class}} {{action 'sortColumn' column.key column.dir}}>{{column.name}}
+              {{#if (eq column.dir 'asc')}}
+                <i class="sort ascending icon"></i>
+              {{/if}}
+              {{#if (eq column.dir 'desc')}}
+                <i class="sort descending icon"></i>
+              {{/if}}
+              {{#if (eq column.dir '')}}
+                <i class="sort icon"></i>
+              {{/if}}
+            </th>
+          {{/each}}
+          <td class="center aligned two wide column">Actions</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div  id="myWin" style="height:600px; overflow-y: scroll; overflow-x: hidden;">
+      <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+        <tbody >
+        {{#each countriesModel as |country|}}
+          <tr>
+            {{#each modelAttributes as |column|}}
+
+              <td class={{column.class}}>
+                {{get country column.key}}
+              </td>
+            {{/each}}
+            <td class="right aligned one wide column">
+              <p>{{edit-country ID=country.id}}</p>
+            </td>
+            <td class="left aligned one wide column">
+              <p>{{delete-country ID=country.id countryDelete=countryDelete}}</p>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{{/if}}
+
+
+{{#if provinceSelected}}
+  <div class="ui very padded container segment" id="top" style="padding-bottom: 1em;">
+    <div class="ui grid" style="margin-top: -30px;">
+      <div class="left thirteen wide column" style="margin-top: -5px;">
+        <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">Provinces</p>
+      </div>
+      <div class="right two wide column" style="padding-left: 50px;">
+
+        {{add-province countries=model.country proivinceAdd=proivinceAdd}}
+      </div>
+    </div>
+    <br><br><br><br>
+
+    <table class="ui fixed table" id="tb" style="border: none;border-color: white;">
+      <tbody>
+      <tr style="font-weight: bold;">
+        <td class="left aligned seven wide column">Name</td>
+        <td class="left aligned seven wide column">Country</td>
+        <td class="center aligned two wide column">Actions</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="ui divider"></div>
+
+    <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+      <tbody >
+      {{#each model.province as |province|}}
+        <tr>
+          <td class="left aligned seven wide column">
+            {{province.name}}
+          </td>
+          <td class="left aligned seven wide column">
+            {{province.country.name}}
+          </td>
+          <td class="right aligned one wide column">
+            <p>{{edit-province provinceData=province countries=model.country}}</p>
+          </td>
+          <td class="left aligned one wide column">
+            <p>{{delete-province ID=province.id provinceDelete=provinceDelete}}</p>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+{{/if}}
+
+{{#if quoteSelected}}
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+  
+  <form class="cd-form floating-labels" {{action "submit" on="submit"}}  style="padding-right: 10em; padding-left: 10em">
+    {{#each model.admin as |admin|}}
+      <h2>Current Client Message: {{admin.message}}</h2>
+    {{/each}}
+    <div class="field" style="margin: 1em 0;">
+      {{input class="message" type="text" value = message placeholder="Quote" required = true}}
+    </div>
+
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+
+    <div class="field">
+      <button class="fluid ui blue button" value="submit" style="max-width: 100%; height: 50px;">
+        Submit
+      </button>
+    </div>
+  </form>
+
+{{/if}}

@@ -1,0 +1,31 @@
+
+
+          <div class='ui form'>
+           <h2> {{fName}} </h2>
+           <div class="ui grid">
+                {{#each questionsModel as |question|}}
+                        <div class="four wide column">
+                         <label>{{question.questionText}}</label>
+                        </div>
+
+                        <div class="four wide column">
+                         <button {{action "addQuestion" question form question.id}}> Add </button>
+                        </div>
+                {{/each}}
+           </div>
+           <br><br>
+         </div>
+
+
+
+{{!--<div class="ui grid" style="display: contents">-->
+  <!--{{#each questionsModel as |question|}}-->
+    <!--<div class="twelve wide column">-->
+      <!--<label>{{question.questionText}}</label>-->
+    <!--</div>-->
+
+    <!--<div class="two wide column">-->
+      <!--<button {{action "addQuestion" question form question.id}}> Add </button>-->
+    <!--</div>-->
+  <!--{{/each}}-->
+<!--</div>--}}

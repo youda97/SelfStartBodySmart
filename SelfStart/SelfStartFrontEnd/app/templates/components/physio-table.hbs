@@ -1,0 +1,105 @@
+<div class="ui very padded container segment" id="top">
+  <div class="ui grid" style="margin-top: -30px;">
+    <div class="left twelve wide column" style="margin-top: -5px;">
+      <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+        Practitioners
+      </p>
+    </div>
+    <div class="right four wide column" style="padding-left: 45px;">
+      {{add-physiotherapist flagAdd=flagAdd}}
+    </div>
+  </div>
+  <br><br><br><br>
+
+  <div class="ui left aligned seven wide column">
+    <div class="ui form" >
+      <div class="two fields" >
+
+        <div class="field">
+          {{#ui-dropdown class="selection" selected=queryPath onChange=(action (mut queryPath))}}
+            <div class="default text">{{searchAttributes.firstObject.name}}</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              {{#each searchAttributes as |attribute|}}
+                <div class="item" data-value="{{attribute.key}}">
+                  {{attribute.name}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+
+        <div class="field">
+          <div class="ui icon input">
+            <i class="search icon"></i>
+            {{input type="text" placeholder="Search..."  value=query }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="display: inline">
+    <table class="ui fixed table" style="border: none;border-color: white;">
+      <tbody >
+      <tr style="font-weight: bold;">
+        <th class="left aligned one wide column "> </th>
+        {{#each modelAttributes as |column|}}
+          <th class={{column.class}} {{action 'sortColumn' column.key column.dir}}>{{column.name}}
+            {{#if (eq column.dir 'asc')}}
+              <i class="sort ascending icon"></i>
+            {{/if}}
+            {{#if (eq column.dir 'desc')}}
+              <i class="sort descending icon"></i>
+            {{/if}}
+            {{#if (eq column.dir '')}}
+              <i class="sort icon"></i>
+            {{/if}}
+          </th>
+        {{/each}}
+        <th class="center aligned two wide  column">Actions</th>
+        <!--<th class="left aligned one wide  column"></th>-->
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div  id="myWindow" style="height:600px; overflow-y: scroll; overflow-x: hidden;">
+    <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+      <tbody >
+      {{#each practsModel as |physio|}}
+
+        <tr>
+          <td class="left aligned one wide column ">
+            <img src="/assets/images/nav/single-01.svg" class="ui mini rounded image"/>
+          </td>
+
+          {{#each modelAttributes as |column|}}
+
+
+            {{#if (eq column.key 'dateHired' )}}
+              <td class={{column.class}}> {{date-to-string date=(get physio column.key)}} </td>
+
+            {{else}}
+              <td class={{column.class}}>
+                {{get physio column.key}}
+              </td>
+            {{/if}}
+          {{/each}}
+
+          <td class="right aligned one wide column ">
+            {{edit-physiotherapist  physiosData=physio flagEdit=flagEdit}}
+          </td>
+          <td class="left aligned one wide column ">
+            <p >{{delete-physiotherapist ID=physio.id flagDelete=flagDelete}}</p>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

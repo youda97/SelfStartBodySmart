@@ -1,0 +1,221 @@
+{{#if tableView}}
+  <p style="cursor: pointer; " title="Edit"  {{action 'openModal' }}>
+    <img src="/assets/images/pencil.svg">
+  </p>
+{{else}}
+  <button style="min-width: 75px;min-height: 40px;margin-top: -12px;margin-left: -21px;font-size: 14px;border-top-left-radius: 0;border-bottom-left-radius: 0.28571429rem;" class="ui positive button" {{action 'openModal'}}>Edit</button>
+{{/if}}
+
+
+{{#ui-modal name=modalName class=modalName}}
+
+  <i class="close icon" {{action "onClose"}}></i>
+
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Edit Exercise
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label">Exercise Name</label>
+        {{input class="run"  type ="text" value = exercisesData.name required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label">Description</label>
+        {{textarea class="message"  type ="text" value = exercisesData.description required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <div class = "ui segment">
+          <label>Action Steps</label>
+
+          {{#each oldActionSteps as |aS|}}
+            <div class="ui grid">
+                <div class="fifteen wide column" style="margin: 1em 0; background-color: white;">
+                <div style="background-color: white;">
+                  {{input class="circle" type="text" value=aS.value required=true placeholder = "New Action Step"}}
+                </div>
+              </div>
+          <div class="one wide column" style="position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+            <i class="large times icon" {{action "removeOption" aS.id}}></i>
+          </div>
+      </div>
+        {{/each}}
+
+
+        {{#each newActionSteps as |aS index|}}
+        <div class="ui grid">
+          <div class="fifteen wide column" style="margin: 1em 0; background-color: white;">
+            <div style="background-color: white;">
+              {{input class="circle" type="text" value=aS.value required=true placeholder = "New Action Step"}}
+            </div>
+          </div>
+          <div class="one wide column" style="position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+            <i class="large times icon" {{action "removeOption" aS.id}}></i>
+          </div>
+      </div>
+        {{/each}}
+
+        <div class="fourteen wide field">
+          <div class="ui grid">
+            <div class="fifteen wide column" {{action "addOption"}} style="margin: 1em 0;">
+              {{input class="disabled circle" type="text" placeholder="Add Step"}}
+            </div>
+          </div>
+        </div>
+  </div>
+      </div>
+
+      {{!-- <div class="field" style="margin: 1em 0;">
+
+
+        <div class="ui grid" style="margin: 1em 0;">
+          <div class="twelve wide column" style="padding: 0">
+            <label class="cd-label">Action Steps</label>
+            {{input class="list"  type ="text" value = exercisesData.actionSteps required = true}}
+          </div>
+          <div class="four wide column" style="padding-right: 0">
+            <button class="ui white right labeled icon button" style="height: 50px" {{action "addActionStep"}}>
+              Add Action Step
+              <i class="add icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="ui inverted segment">
+          <label style="color: white">Current Action Steps</label>
+          <ol align = "left">
+            {{#each actionStep as |aS|}}
+              <li>
+                <p>
+                  {{aS}}
+                  <i style=" cursor: pointer;" title="Edit" {{action 'edit' }} class="gray write icon" ></i>
+                  <i style=" cursor: pointer;" title="Delete" {{action "openModal"}} class="red remove icon" ></i>
+                </p>
+              </li>
+            {{/each}}
+          </ol>
+        </div>
+      </div> --}}
+
+      <div class="ui three column grid">
+        <div class="column" style="margin: 1em 0;">
+          <label class="cd-label">Sets</label>
+          {{input class="watch"  type ="text" value = exercisesData.sets}}
+
+        </div>
+        <div class="column" style="margin: 1em 0;">
+          <label class="cd-label">Reps</label>
+          {{input class="watch"  type ="text" value = exercisesData.reps}}
+        </div>
+        <div class="column" style="margin: 1em 0;">
+          <label class="cd-label">Duration</label>
+          {{input class="watch"  type ="text" value = exercisesData.duration}}
+
+        </div>
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label">Multi Media URL</label>
+        {{input class="link"  type ="text" value = exercisesData.multimediaURL}}
+      </div>
+
+      <div class = "field">
+
+        {{#each queue as |file| }}
+          <div class="ui divided demo items">
+            <div class="item">
+              <div class="image">
+                {{#if file.isUploading}}
+                  <div class="ui active inverted dimmer">
+                    <div class="ui loader"></div>
+                  </div>
+                {{else}}
+                  <img src="{{file.base64Image}}">
+                {{/if }}
+              </div>
+              <div class="middle aligned content">
+                <div class="description">
+                  {{#if file.isDisplayableImage}}
+                    <label>Image Name</label>
+                    {{input type ="text" valueBinding=file.name}}
+                    <button class="ui red basic button" {{action 'deleteFile' file}}>
+                      Delete
+                    </button>
+                    <br>
+                  {{else}}
+                    <p>Unsupported image</p>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        {{#each queue2 as |Image| }}
+          <div class="ui divided demo items">
+            <div class="item">
+              <div class="image">
+                <img src="{{Image.imageData}}">
+              </div>
+              <div class="middle aligned content">
+                <div class="description">
+                  <label>Image Name</label>
+                  {{input type ="text" valueBinding=Image.name}}
+                  <button class="ui red basic button" {{action 'deleteFile' file}}>
+                    Delete
+                  </button>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        <div class="ui fluid labeled input">
+          <label class="ui fluid huge label" style="{{labelStyle}}">
+            <i class="big cloud upload icon"></i>
+            Click or Drop images into this area to upload images
+          </label>
+          <input type="file" value="target.value" onchange={{action "selectFile"}} style="{{inputStyle}}"
+                 accept="{{accept}}" multiple={{multiple}}>
+        </div>
+        <br><br><br><br>
+
+
+        <div class ="ui center alligned three column grid" style="border:0.5px solid black;overflow-y:scroll;max-height:300px;">
+          {{#each Images as |Image|}}
+            <div class ="column" style="padding: 1em">
+              <div class="ui fluid card">
+                <div class="content" style="max-height: 80px;min-height: 80px;text-align:  center;display: table;">
+                  <p style="display: table-cell;vertical-align: middle;">{{Image.name}}</p>
+                </div>
+                <div class = "content">
+                  <div class="image">
+                    <img style="max-height:105px;width: auto;display: block;margin-left: auto;margin-right: auto;" class = "ui small image" src="{{Image.imageData}}">
+                  </div>
+                </div>
+                <div class="extra content">
+                  {{ui-checkbox class="toggle" label="Add" checked=cbState change=(action "addTempImage" Image)}}
+                  {{!--{{input type="checkbox" checked=cbState change=(action "addTempImage" Image) }}--}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+
+
+      </div>
+
+      <div class="field" style="margin-top: 3em;">
+        <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+{{/ui-modal}}

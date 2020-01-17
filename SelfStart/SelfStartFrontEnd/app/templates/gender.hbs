@@ -1,0 +1,93 @@
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/table-style.css"> <!-- Resource style -->
+
+<br><br><br><br><br><br><br>
+
+<div class="ui centered cards" >
+  <div class="card" style="width:12%">
+    <div class="content">
+      <div class="header">Countries</div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="add icon"></i>
+
+      {{#link-to 'country'}}
+        Add Country
+      {{/link-to}}
+
+    </div>
+  </div>
+
+  <div class="card" style="width:12%">
+    <div class="content">
+      <div class="header">Provinces</div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="add icon"></i>
+      {{#link-to 'province'}}
+        Add Province
+      {{/link-to}}
+    </div>
+  </div>
+
+  <div class="card" style="width:12%">
+    <div class="content">
+      <div class="header">Cities</div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="add icon"></i>
+      Add City
+    </div>
+  </div>
+
+  <div class="card" style="width:12%">
+    <div class="content">
+      <div class="header">Genders</div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="add icon"></i>
+
+      {{#link-to 'gender'}}
+        Add Gender
+      {{/link-to}}
+
+    </div>
+  </div>
+
+  <div class="card" style="width:12%">
+    <div class="content">
+      <div class="header">Marital Statuses</div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="add icon"></i>
+      {{#link-to 'marital-status'}}
+        Add Marital Status
+      {{/link-to}}
+    </div>
+  </div>
+</div>
+
+
+<br><br><br><br><br>
+<section id="cd-section">
+  <section id="cd-table">
+    <div class="cd-table-container">
+      <ul>
+        <li style="  text-align: center; font-size: 1.2rem; text-transform: uppercase;
+                          font-weight: bold; color: white; background-color: #f58b4c;">Genders</li>
+        {{#each model as |gender|}}
+
+          <li>
+            {{gender.name}}
+            <p style="float: right;">{{delete-gender ID=gender.id}}</p>
+            <p style="float: right; padding-right: 2%;">{{edit-gender ID=gender.id}}</p>
+          </li>
+
+        {{/each}}
+      </ul>
+    </div>
+
+  </section> <!-- cd-table -->
+  {{add-gender}}
+</section>

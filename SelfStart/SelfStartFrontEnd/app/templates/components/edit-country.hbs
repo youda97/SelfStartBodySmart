@@ -1,0 +1,25 @@
+<p style="cursor: pointer; " title="Edit"  {{action 'openModal' }}>
+  <img src="/assets/images/pencil.svg">
+</p>
+
+{{#ui-modal name= modalName class=modalName }}
+
+  <div class="header">
+    Edit country: "{{name}}"
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="field">
+        <label>New Country Name</label>
+        {{input type="text" cols="50" rows="1" value = name placeholder="add country"}}
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="actions" style="padding:0; ">
+    <div class="ui positive right" style="padding:1em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Save<i class="checkmark icon"></i></div>
+    <div class="ui deny" style="padding:1em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">Cancel</div>
+  </div>
+
+{{/ui-modal}}

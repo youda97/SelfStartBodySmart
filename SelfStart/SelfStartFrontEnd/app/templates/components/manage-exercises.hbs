@@ -1,0 +1,173 @@
+<div class="ui container">
+  <div class="ui top attached tabular stackable menu" style="padding-left: 20%;">
+    <a class="{{tableState}} item" {{action "table"}}>
+      Table View
+    </a>
+    <a class="{{cardState}} item" {{action "card"}}>
+      Card View
+    </a>
+  </div>
+  <div class="ui segment" style="background: transparent;border: none;box-shadow: none;">
+
+
+    {{#if tableView}}
+      <div class="ui very padded container segment" id="top">
+        <div class="ui grid" style="margin-top: -30px;">
+          <div class="left thirteen wide column" style="margin-top: -5px;">
+            <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+              Exercises
+            </p>
+          </div>
+          <div class="right two wide column" style="padding-left: 30px;">
+            {{add-exercises Images=model.image flagAdd=flagAdd}}
+          </div>
+        </div>
+        <br><br><br><br>
+
+
+        <div class="ui left aligned seven wide column">
+          <div class="ui form" >
+            <div class="two fields" >
+
+              <div class="field">
+                {{#ui-dropdown class="selection" selected=queryPath onChange=(action (mut queryPath))}}
+                  <div class="default text">{{searchAttributes.firstObject.name}}</div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each searchAttributes as |attribute|}}
+                      <div class="item" data-value="{{attribute.key}}">
+                        {{attribute.name}}
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
+              </div>
+
+              <div class="field">
+                <div class="ui icon input">
+                  <i class="search icon"></i>
+                  {{input type="text" placeholder="Search..."  value=query }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div style="display: inline">
+          <table class="ui fixed table" style="border: none;border-color: white;">
+            <tbody >
+            <tr style="font-weight: bold;">
+              {{#each modelAttributes as |column|}}
+                <th class={{column.class}} {{action 'sortColumn' column.key column.dir}}>
+                  {{column.name}}
+                  {{#if (eq column.dir 'asc')}}
+                    <i class="sort ascending icon"></i>
+                  {{/if}}
+                  {{#if (eq column.dir 'desc')}}
+                    <i class="sort descending icon"></i>
+                  {{/if}}
+                  {{#if (eq column.dir '')}}
+                    <i class="sort icon"></i>
+                  {{/if}}
+                </th>
+              {{/each}}
+              <th class="center aligned two wide  column">Actions</th>
+              <!--<th class="left aligned one wide  column"></th>-->
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div  id="cards" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+          <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+            <tbody >
+            {{#each exercisesModel as |exercise|}}
+
+              <tr>
+
+                {{#each modelAttributes as |column|}}
+
+                  <td class={{column.class}}>
+                    {{get exercise column.key}}
+                  </td>
+                {{/each}}
+
+                <td class="right aligned one wide column ">
+                  {{edit-exercises exercisesData=exercise images=exercise.images tableView=tableView flagEdit=flagEdit}}
+                </td>
+                <td class="left aligned one wide column ">
+                  <p >{{delete-exercises ID=exercise.id tableView=tableView flagDelete=flagDelete}}</p>
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+    {{/if}}
+
+
+    {{#if cardView}}
+      <div class="ui form" >
+        <div class="inline fields" >
+
+
+          <div class = "field" style="margin-top: 10px;right: 1.5%;position: absolute;">
+            {{add-exercises flagAdd=flagAdd Images=model.image}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class ="ui five column doubling grid">
+        {{#each exercisesModel as |Exercise index|}}
+          <div class="column" style="padding-bottom: 50px;padding-top: 50px;">
+            <div class="ui fluid card" style="max-height: 226px;min-height: 226px;width: 154px !important;">
+              <div class = "image" style="max-height:105px;min-height:105px;min-width:141.63px;" onmouseleave={{action "pause" Exercise}} onmouseover={{action "play" Exercise}}>
+                {{#if Exercise.images}}
+
+                  {{#slick-slider speed=500 autoplay=false arrows=true id=index pauseOnHover=false}}
+                    {{#each Exercise.images as |Image|}}
+                      <div class ="box">
+                        <img style="max-height:105px;display: block;margin-left: auto;margin-right: auto;" src="{{Image.imageData}}">
+                      </div>
+                    {{/each}}
+                  {{/slick-slider}}
+
+                {{else}}
+                  <img src="/assets/images/NoImagesSaved.jpg" style="height:105px; width: auto;">
+                {{/if}}
+              </div>
+
+              <div class="content" style="max-height: 80px;min-height: 80px;text-align:  center;display: table;">
+                <p style="display: table-cell;vertical-align: middle;">{{Exercise.name}}</p>
+              </div>
+
+              <div class="extra content" style="padding-left:21px;">
+                <div class="mini ui buttons">
+                  {{edit-exercises exercisesData=Exercise flagEdit=flagEdit images=Exercise.images Im=model.image}}
+                  <div class="or" style="margin-top: -8px;"></div>
+                  {{delete-exercises ID=Exercise.id flagDelete=flagDelete}}
+                </div>
+              </div>
+
+              <div class="extra content">
+                <a><span class="date">{{Exercise.dateCreated}}</span></a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+
+
+    {{/if}}
+  </div>
+</div>

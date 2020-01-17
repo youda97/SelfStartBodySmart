@@ -1,0 +1,44 @@
+<div class="ui button" {{action 'openModal'}}>
+  Add City
+</div>
+
+
+{{#ui-modal name="newCity" class="small newCity"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Adding New City
+  </div>
+  <div class="content">
+
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <div class="field" style="margin-bottom: 1em">
+        <h4>City</h4>
+        {{input class="world" type="text" value = name placeholder="Add city" required=true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <h4>Province</h4>
+        <p class="cd-select icon">
+          <select class="world" onchange={{action 'selectProvince' value="target.value"}} required=true>
+            {{#each provinces as |oneProvince|}}
+              <option value={{oneProvince.id}} selected={{eq province oneProvince.name}}>
+                {{oneProvince.name}}
+              </option>
+            {{/each}}
+          </select>
+          <</p>
+      </div>
+
+      <div class="field">
+        <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+{{/ui-modal}}

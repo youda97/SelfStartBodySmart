@@ -1,0 +1,22 @@
+<div class="ui centered {{disabled}} button" {{action "openModal"}}>
+  Assign
+</div>
+
+{{#ui-modal name=modalName class=modalName }}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="ui icon header">
+    Assign {{plansData.planName}}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to assign this rehabilitation plan?</p>
+  </div>
+  <br>
+
+  <div class="actions" style="padding:0">
+
+    <div class="ok " style="padding:.6em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Yes</div>
+    <div class="cancel " style="padding:.6em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">No</div>
+  </div>
+{{/ui-modal}}

@@ -1,0 +1,80 @@
+  {{#if question.sa}}
+    <div class="field" style="margin: 1em 0;">
+      <label class="cd-label">{{question.questionText}}</label>
+      {{input class="message" type="text" value = SAanswer focus-out="saSave"}}
+    </div>
+  {{/if}}
+
+  {{#if question.ra}}
+    <div class="field" style="margin: 1em 0;">
+      <label class="cd-label">{{question.questionText}}</label>
+      <br><br>
+      {{ui-rating
+        class="ui massive star rating"
+        maxRating=10
+        onRate=(action "ratingSave" rateValue=value)}}
+    </div>
+  {{/if}}
+
+  {{#if question.tf}}
+  <div class="field" style="margin: 1em 0;">
+    <label class="cd-label">{{question.questionText}}</label>
+      <ul class="cd-form-list">
+        <li>
+          <input type="radio"  value="True"  name="{{question.id}}" current=tf onChange={{action "TFtrue"}}>
+          <label>Yes</label>
+        </li>
+
+        <li>
+          <input type="radio" value="False" name="{{question.id}}" current=tf onChange={{action "TFtrue"}}>
+          <label>No</label>
+        </li>
+      </ul>
+  </div>
+
+  {{/if}}
+
+  {{#if question.mc}}
+    <div class="ui form" style="margin: 1em 0;">
+      <label class="cd-label">{{question.questionText}}</label>
+
+
+      <ul class="cd-form-list">
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop1Save'}}>
+          <label>{{mc-display question.optionString 0}}</label>
+        </li>
+
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop2Save'}}>
+          <label>{{mc-display question.optionString 1}}</label>
+        </li>
+
+    {{#if (number-of-mc question.optionNumber 2)}}
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop3Save'}}>
+          <label>{{mc-display question.optionString 2}}</label>
+        </li>
+    {{/if}}
+
+      {{#if (number-of-mc question.optionNumber 3)}}
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop4Save'}}>
+          <label>{{mc-display question.optionString 3}}</label>
+        </li>
+      {{/if}}
+      {{#if (number-of-mc question.optionNumber 4)}}
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop5Save'}}>
+          <label>{{mc-display question.optionString 4}}</label>
+        </li>
+      {{/if}}
+      {{#if (number-of-mc question.optionNumber 5)}}
+        <li>
+          <input type="radio" name="{{question.id}}" onchange={{action 'mcop6Save'}}>
+          <label>{{mc-display question.optionString 5}}</label>
+        </li>
+      {{/if}}
+      </ul>
+    </div>
+  {{/if}}

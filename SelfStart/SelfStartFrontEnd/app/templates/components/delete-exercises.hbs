@@ -1,0 +1,28 @@
+{{!-- <div class = "ui button" {{action 'openModal'}} title="Delete"> --}}
+{{!-- <i class=" remove icon"> </i> --}}
+{{!-- Delete --}}
+{{!-- </div> --}}
+{{#if tableView}}
+  <p style="cursor: pointer;" {{action 'openModal' }}
+     title="Delete">
+    <img src="/assets/images/trash-simple.svg">
+  </p>
+{{else}}
+  <button style="min-width: 75px;min-height: 40px;margin-top: -12px;border-bottom-left-radius: 0;border-top-left-radius: 0;border-bottom-right-radius: 0.28571429rem;" class="ui button" {{action 'openModal'}}>Delete</button>
+{{/if}}
+
+{{#ui-modal name= modalName class=modalName }}
+  <div class="ui icon header">
+    Please Confirm ...
+  </div>
+  <div class="content">
+    <p>Are you sure you need to delete this element?</p>
+  </div>
+  <br>
+
+  <div class="actions" style="padding:0">
+
+    <div class="ok " style="padding:.6em; float:left; width: 50%; cursor: pointer; background: #fc7169; color:white; text-align: center;">Yes</div>
+    <div class="cancel " style="padding:.6em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">No</div>
+  </div>
+{{/ui-modal}}

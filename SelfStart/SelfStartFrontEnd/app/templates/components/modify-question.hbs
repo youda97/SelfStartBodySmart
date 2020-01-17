@@ -1,0 +1,91 @@
+<p style="cursor: pointer; " title="Edit"  {{action 'openModal' }} {{action 'isMultipleChoice'}}>
+  <img src="/assets/images/pencil.svg">
+</p>
+
+{{#ui-modal name= modalName class=modalName }}
+
+  <div class="header">
+    Edit Question: "{{questionText}}"
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      {{#if multipleChoice}}
+
+        <div class="field" style="margin: 1em 0;">
+          <label class="cd-label">Question</label>
+          {{input class="question" type="text" value = questionData.questionText required = true}}
+        </div>
+
+        <div class="field" style="margin: 1em 0;">
+          <label class="cd-label">Help Description</label>
+          {{textarea class="message" type="text" value = questionData.helpDescription}}
+        </div>
+
+
+        <div class="field" style="margin: 1em 0;">
+          <label class="cd-label">Option 1</label>
+          {{input class="circle" type="text" valueBinding = opt1String required = true}}
+        </div>
+
+
+        {{#if opt2}}
+          <div class="field" style="margin: 1em 0;">
+            <label class="cd-label">Option 2</label>
+            {{input class="circle" type="text" valueBinding = opt2String required = true}}
+          </div>
+        {{/if}}
+
+        {{#if opt3}}
+          <div class="field" style="margin: 1em 0;">
+            <label class="cd-label">Option 3</label>
+            {{input class="circle" type="text" valueBinding = opt3String required = true}}
+          </div>
+        {{/if}}
+
+        {{#if opt4}}
+          <div class="field" style="margin: 1em 0;">
+            <label class="cd-label">Option 4</label>
+            {{input class="circle" type="text" valueBinding = opt4String required = true}}
+          </div>
+        {{/if}}
+
+        {{#if opt5}}
+          <div class="field" style="margin: 1em 0;">
+            <label class="cd-label">Option 5</label>
+            {{input class="circle" type="text" valueBinding = opt5String required = true}}
+          </div>
+        {{/if}}
+
+        {{#if opt6}}
+          <div class="field" style="margin: 1em 0;">
+            <label class="cd-label">Option 6</label>
+            {{input class="circle" type="text" valueBinding = opt6String required = true}}
+          </div>
+        {{/if}}
+
+      {{else}}
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label">Question</label>
+        {{input class="question" type="text" value = questionData.questionText required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        <label class="cd-label">Help Description</label>
+        {{textarea class="message" type="text" value = questionData.helpDescription}}
+      </div>
+
+      {{/if}}
+
+
+  <div class="field" style="padding-top: 2em">
+    <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+      Submit
+    </button>
+  </div>
+
+  </form>
+  </div>
+
+{{/ui-modal}}

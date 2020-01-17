@@ -1,0 +1,42 @@
+<button {{action "openModal"}}>Display data</button>
+
+
+{{#ui-modal name=modalName class=modalName}}
+  <i class="close icon"></i>
+
+  <div class="header">
+    Answers to: {{question.questionText}}
+  </div>
+  <div class="scrolling content">
+
+  {{!--{{#each matchedAnswers as |ans|}}-->
+    <!--<div class="field" style="margin: 1em 0;">-->
+      <!--<p style="display: inline; font-weight: bold">Answer: </p> {{ans.answer}}-->
+    <!--</div>-->
+
+  <!--{{/each}}--}}
+
+
+  {{!--<label># of 1 ratings: {{ratingGroupCount.[0]}} </label>  <br>-->
+  <!--<label># of 2 ratings: {{ratingGroupCount.[1]}}  </label> <br>-->
+  <!--<label># of 3 ratings: {{ratingGroupCount.[2]}} </label> <br>-->
+  <!--<label># of 4 ratings: {{ratingGroupCount.[3]}}  </label> <br>-->
+  <!--<label># of 5 ratings: {{ratingGroupCount.[4]}} </label>  <br>-->
+  <!--<label># of 6 ratings: {{ratingGroupCount.[5]}} </label>  <br>-->
+  <!--<label># of 7 ratings: {{ratingGroupCount.[6]}} </label>  <br>-->
+  <!--<label># of 8 ratings: {{ratingGroupCount.[7]}} </label> <br>-->
+  <!--<label># of 9 ratings: {{ratingGroupCount.[8]}} </label> <br>-->
+  <!--<label># of 10 ratings: {{ratingGroupCount.[9]}} </label> <br> <br>-->
+  <!--<label>Average rating: {{averageRating}} </label> <br>--}}
+
+
+  <!--<div class="chart-container">-->
+  {{bar-chart data=graphData options=options}}
+  <!--</div>-->
+
+  </div>
+  <div class="actions" style="padding:0">
+    <div class="ok" style="padding:.6em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Save Report</div>
+    <div class="cancel" style="padding:.6em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">Exit</div>
+  </div>
+  {{/ui-modal}}

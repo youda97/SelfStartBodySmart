@@ -1,0 +1,52 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Exercise Menu</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="ui container segment" id="top" >
+  <div class="ui grid">
+    <div class="left thirteen wide column" style="margin-top: -5px;">
+      <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+        Exercise List
+      </p>
+    </div>
+  </div>
+  <br><br><br><br>
+
+  <div style="display: inline">
+    <table class="ui fixed table" style="border: none;border-color: white;">
+      <tbody >
+      <tr style="font-weight: bold;">
+        <th>Rehabilitation Name</th>
+        <th>Description</th>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div  id="clientWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+
+    <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+      <tbody >
+      {{#each rehabPlans as |rehabPlan|}}
+        <tr>
+          <td>{{#link-to 'client.view-rehabplan' rehabPlan.id}}{{rehabPlan.planName}}{{/link-to}}</td>
+          <td>{{#link-to 'client.view-rehabplan' rehabPlan.id}}{{rehabPlan.description}}{{/link-to}}</td>
+        </tr>
+
+
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<br><br><br><br>
+

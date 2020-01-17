@@ -1,0 +1,42 @@
+<a class="ui large inverted basic button" {{action 'openModal'}}>
+  Ask a Therapist
+</a>
+
+{{#ui-modal name="ask" class="ask tiny"}}
+
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <h2 class="ui fluid centered header" style="border-radius: 0.28571429rem;">Ask a therapist</h2>
+
+  <!--style="padding-bottom: 0"-->
+
+  <div class="scrolling content" >
+    <form class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <div class="ui two column grid">
+        <div class="column " style="margin: 1em 0;">
+          {{input class="user" type="text" value = firstName placeholder="First name" required = true}}
+        </div>
+        <div class="column " style="margin: 1em 0;">
+          {{input class="user" type="text" value = lastName placeholder="Last Name" required = true}}
+        </div>
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        {{input class="email" type ="email" value=email placeholder="Email" required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        {{textarea class="message" type ="text" value=comment placeholder="Question" required = true}}
+      </div>
+
+
+      <div class="field">
+        <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">Submit</button>
+      </div>
+
+
+    </form>
+  </div>
+
+{{/ui-modal}}

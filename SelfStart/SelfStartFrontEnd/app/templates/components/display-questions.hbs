@@ -1,0 +1,103 @@
+<p style="cursor: pointer; " title="View Form"  {{action 'openModal' }}>
+  <img src="/assets/images/eye-19.svg">
+</p>
+
+{{#ui-modal name=modalName class=modalName }}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+
+  <div class="header">Form View</div>
+  <div class="scrolling content" >
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+
+<!--<script type="text/javascript">$(document).ready(function(){$(".rating").rating();});</script>-->
+
+    {{#each formModel as |q|}}
+
+      {{#if q.sa}}
+        <div class="field" style="margin: 1em 0;">
+          <label class="cd-label">{{q.questionText}}</label>
+          {{input class="message" type="text" value = the required = true}}
+        </div>
+      {{/if}}
+
+      {{#if q.ra}}
+        <div class="field" style="margin: 1em 0;">
+          <label class="cd-label">{{q.questionText}}</label>
+          {{ui-rating class="ui massive star rating"
+            initialRating=rating
+            rating=rating
+            maxRating=10
+            onRate=(action (mut rating))}}
+        </div>
+      {{/if}}
+
+      {{#if q.tf}}
+        <div class="field" style="margin: 1em 0;">
+          <h4>{{q.questionText}}</h4>
+          <ul class="cd-form-list">
+            <li>
+              <input type="radio" name="{{q.id}}" checked>
+              <label>Yes</label>
+            </li>
+
+            <li>
+              <input type="radio" name="{{q.id}}">
+              <label>No</label>
+            </li>
+          </ul>
+
+        </div>
+      {{/if}}
+
+      {{#if q.mc}}
+        <div class="ui form" style="margin: 1em 0;">
+
+          <h4>{{q.questionText}}</h4>
+          <ul class="cd-form-list">
+            <li>
+              <input type="radio" name="{{q.id}}" checked>
+              <label>{{mc-display q.optionString 0}}</label>
+            </li>
+
+            <li>
+              <input type="radio" name="{{q.id}}">
+              <label>{{mc-display q.optionString 1}}</label>
+            </li>
+
+            <li>
+              <input type="radio" name="{{q.id}}">
+              <label>{{mc-display q.optionString 2}}</label>
+            </li>
+
+
+            {{#if (number-of-mc q.optionNumber 3)}}
+              <li>
+                <input type="radio" name="{{q.id}}">
+                <label>{{mc-display q.optionString 3}}</label>
+              </li>
+            {{/if}}
+            {{#if (number-of-mc q.optionNumber 4)}}
+              <li>
+                <input type="radio" name="{{q.id}}">
+                <label>{{mc-display q.optionString 4}}</label>
+              </li>
+            {{/if}}
+            {{#if (number-of-mc q.optionNumber 5)}}
+              <li>
+                <input type="radio" name="{{q.id}}">
+                <label>{{mc-display q.optionString 5}}</label>
+              </li>
+            {{/if}}
+
+          </ul>
+        </div>
+      {{/if}}
+    {{/each}}
+
+    </form>
+  </div>
+{{/ui-modal}}

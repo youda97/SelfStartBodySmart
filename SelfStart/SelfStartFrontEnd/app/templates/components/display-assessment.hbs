@@ -1,0 +1,31 @@
+<p style="cursor: pointer; " title="View Answers"  {{action 'openModal' }}>
+  <img src="/assets/images/eye-19.svg">
+</p>
+
+{{#ui-modal name=modalName class=modalName }}
+
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">Form View</div>
+  <div class="scrolling content" >
+
+    <form id="edit" class="cd-form floating-labels">
+      {{#each orders as |q index|}}
+        {{display-answers answers = ans question=q.question assessment=assessment qNumber=index assessid=assessment.id}}
+      {{/each}}
+
+    </form>
+  </div>
+
+{{/ui-modal}}
+
+{{!--<div class="ui form">-->
+
+  <!--{{#each assessmentModel.questions as |q index|}}-->
+    <!--{{get-answers question=q assessment=assessmentModel qNumber = index assessid = assessmentModel.id}}-->
+  <!--{{/each}}-->
+  <!--<button {{action "Submit"}}>-->
+    <!--Submit-->
+  <!--</button>-->
+<!--</div>--}}

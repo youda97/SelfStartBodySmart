@@ -1,0 +1,14 @@
+{
+  "name": "self-start-front-end",
+  "dependencies": {
+    "semantic-ui": "^2.2.13",
+    "seiyria-bootstrap-slider": "~6.0.6",
+    "interact": "1.2.8",
+    "jquery-simulate": "1.0.1",
+    "fontawesome": "~4.7.0",
+    "slick-carousel": "^1.8.1",
+    "d3": "~3.5.3",
+    "lodash": "~3.10.0",
+    "video.js": "~5.12"
+  }
+}

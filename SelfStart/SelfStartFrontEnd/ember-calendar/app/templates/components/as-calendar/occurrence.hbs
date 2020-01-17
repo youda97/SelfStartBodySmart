@@ -1,0 +1,20 @@
+<div class="as-calendar-occurrence__container">
+
+  {{#if isBooked}}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      <h1 class="as-calendar-occurrence__title" style={{titleStyle}}>{{title}}</h1>
+      <p> {{startingTime}} - {{dayEndingTime}}</p>
+      <h1>testing true isBooked</h1>
+    {{/if}}
+  {{else}}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      <h1 class="as-calendar-occurrence__title" style={{titleStyle}}>{{title}}</h1>
+      <p> {{startingTime}} - {{dayEndingTime}}</p>
+    {{/if}}
+  {{/if}}
+
+</div>

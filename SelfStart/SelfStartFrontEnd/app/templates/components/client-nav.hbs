@@ -1,0 +1,55 @@
+{{!--<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/home-style.css">
+--}}
+<!--<style>-->
+<!--.ui.visible.left.sidebar ~ .fixed,-->
+<!--.ui.visible.left.sidebar ~ .pusher {-->
+<!---webkit-transform: translate3d(260px, 0, 0); transform: translate3d(260px, 0, 0);-->
+<!--}-->
+<!--</style>-->
+
+{{#if show}}
+
+
+<div id="example" class="index">
+
+
+  <div class="full height">
+    <div class="following bar">
+      <div class="ui container">
+
+        <div class="ui large secondary network menu inverted">
+          <div class="item">
+            <div class="ui logo shape">
+              <div class="sides">
+                <div class="active ui side">
+                  {{#link-to 'client'}}
+                    <img class="ui image selfStart" src="/assets/images/home/Header.png">
+                  {{/link-to}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right menu inverted">
+            <a  href="/client/exercise-menu"class="item">Exercise Menu</a>
+            <!--<a  href="/"class="item">Initial Intake</a>-->
+            <a href="/client/upload-photos" class="item">Upload Photos</a>
+            <!--<a  href="/"class="item">Transations</a>-->
+            <a href="/client/appointment" class="item">Appointment</a>
+            <a  href="/client/settings"class="item">Settings</a>
+            {{#link-to 'home'}}
+            <a class="item" {{action "logout"}} style="margin-top: 28px">Logout</a>
+            {{/link-to}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {{yield}}
+
+  </div>
+</div>
+{{else}}
+{{!-- <p>You do not have authorization to this route, please register.</p> --}}
+{{/if}}

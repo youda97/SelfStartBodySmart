@@ -1,0 +1,47 @@
+{{!--<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/home-style.css">
+--}}
+<!--<style>-->
+<!--.ui.visible.left.sidebar ~ .fixed,-->
+<!--.ui.visible.left.sidebar ~ .pusher {-->
+<!---webkit-transform: translate3d(260px, 0, 0); transform: translate3d(260px, 0, 0);-->
+<!--}-->
+<!--</style>-->
+
+{{#if show}}
+<div id="example" class="index">
+
+
+  <div class="full height">
+    <div class="following bar">
+      <div class="ui container">
+
+        <div class="ui large secondary network menu inverted">
+          <div class="item">
+            <div class="ui logo shape">
+              <div class="sides">
+                <div class="active ui side">
+                {{#link-to 'admin'}}
+                    <img class="ui image selfStart" src="/assets/images/home/Header.png">
+                {{/link-to}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right menu inverted">
+            <a href="/admin/accounts" class="item">Accounts</a>
+            <a href="/admin/forms" class="item">Forms</a>
+            <a href="/admin/manage-selections" class="item">Configure</a>
+            {{#link-to 'home'}}
+            <a class="item" {{action "logout"}} style="margin-top: 28px;">Logout</a>
+            {{/link-to}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{yield}}
+
+  </div>
+</div>
+{{/if}}

@@ -1,0 +1,33 @@
+<div id="content">
+  {{add-image}}'
+
+  <table class="ui single line table">
+    <thead>
+    <tr>
+      <th>Image Name</th>
+      <th>Image</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each model.image as |Image|}}
+      <tr>
+        <td>{{Image.name}}</td>
+        <td>
+          <img class = "ui small image" src="{{Image.imageData}}">
+        </td>
+        <td>
+          <div class="four wide column right aligned">
+            {{delete-image ID=Image.id}}
+          </div>
+        </td>
+      </tr>
+    {{/each}}
+    </tbody>
+
+  </table>
+
+</div>
+
+{{outlet}}

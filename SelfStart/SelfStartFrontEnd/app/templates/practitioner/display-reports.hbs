@@ -1,0 +1,25 @@
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+<link integrity="" rel="stylesheet" href="/assets/css/table-style.css"> <!-- Resource style -->
+
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Client Report</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<br>
+<div>
+  {{generate-reports}}
+</div>
+
+<div>
+  {{#each model.test as |assessmentTest|}}
+  <div> wow</div>
+    <div>{{assessmentTest}} wow</div>
+  {{/each}}
+</div>

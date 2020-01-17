@@ -1,0 +1,62 @@
+<div class="ui very padded container segment" id="top">
+  <div class="ui grid" style="margin-top: -30px;">
+    <div class="left twelve wide column" style="margin-top: -5px;">
+      <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+        Assessment Tests
+      </p>
+    </div>
+  </div>
+  <br><br><br><br>
+
+  <div style="display: inline">
+    <table class="ui fixed table" style="border: none;border-color: white;">
+      <tbody >
+      <tr style="font-weight: bold;">
+
+          <th>
+              Assessment Test
+          </th>
+          <th>Terminated</th>
+
+        <th class="left aligned two wide  column">Actions</th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div  id="myWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+    <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+      <tbody >
+      <!--testModel = AssessmentTest-->
+      {{#each rehabclinetLink as |test|}}
+        <tr>
+          <td>
+            {{test.assessmentTest.name}}
+          </td>
+          <td>
+            {{#if test.terminated}}
+              Terminated
+            {{else}}
+              Ongoing
+            {{/if}}
+          </td>
+
+
+
+          <td class="right aligned one wide column" style="padding-right: 0">
+            <p>{{display-assessment model=test.assessmentTest.form assessment=test.assessmentTest ID= test.id}}</p>
+          </td>
+          <td class="left aligned one wide column ">
+            <p >{{terminate-assessment ID=test}}</p>
+          </td>
+
+        </tr>
+      {{/each}}
+
+
+      </tbody>
+    </table>
+  </div>
+</div>

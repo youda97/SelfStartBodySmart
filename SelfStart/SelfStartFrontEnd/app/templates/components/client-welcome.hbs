@@ -1,0 +1,23 @@
+{{#if show}}
+<div class="masthead segment bg3">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library">Welcome {{clientName}}</span>
+        {{#each model as |admin|}}
+          <span class="tagline">
+            {{admin.message}}
+          </span>
+        {{/each}}
+
+      </h1>
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+      <div class="ui center aligned grid">
+      </div>
+    </div>
+  </div>
+
+  <div id="SkypeButton_Chat" style="position: fixed; right: 0; bottom: 0"></div>
+</div>
+{{/if}}

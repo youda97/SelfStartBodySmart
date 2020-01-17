@@ -1,0 +1,35 @@
+<a class="ui large inverted download button" {{action 'openModal'}}>
+  Register
+</a>
+
+{{#ui-modal name="register" class="register"}}
+  {{!--<link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> &lt;!&ndash; Resource style &ndash;&gt;--}}
+
+  <h2 class="ui fluid centered header">Register</h2>
+
+  <div id="ui container" style="height: 320px; padding-left:10%; padding-right: 10%; padding-top: 2%">
+    <form class="ui form">
+
+      <div class="field">
+        <label>User Name</label>
+        {{input type ="text" value=UName placeholder="User Name"}}
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        {{input type ="text" value=Email placeholder="Email"}}
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        {{input type ="password" value=PWord placeholder="Password"}}
+      </div>
+
+      <div class = "inline">
+        <button class="ui green button " {{action "submit"}}>Submit</button>
+        <button class="ui button " {{action "deny"}}>Cancel</button>
+      </div>
+
+    </form>
+  </div>
+{{/ui-modal}}

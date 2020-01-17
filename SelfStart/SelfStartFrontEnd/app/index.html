@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SelfStartFrontEnd</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/assets/images/logo.png">
+    {{content-for "head"}}
+
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/reset.css"> <!-- CSS reset -->
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/doc.css"> <!-- CSS reset -->
+
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/self-start-front-end.css">
+
+
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/home-style.css">
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    {{content-for "head-footer"}}
+  </head>
+  <body>
+    {{content-for "body"}}
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/self-start-front-end.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

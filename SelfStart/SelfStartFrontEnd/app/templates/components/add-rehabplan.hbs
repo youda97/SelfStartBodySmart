@@ -1,0 +1,53 @@
+<div class="ui button" {{action 'openModal'}}>
+  Add Plan
+</div>
+
+{{#ui-modal name="newPlan" class="newPlan"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Adding new plan
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <div class="field" style="margin: 1em 0;">
+        {{input class="star" type="text" value = Name placeholder="Name" required = true}}
+      </div>
+
+
+      <div class="field" style="margin: 1em 0;">
+        {{input  class="message" name="cd-textarea" value = description placeholder="Description" required = true}}
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        {{input class="award" type="text"  value = goal placeholder="Goal" required = true}}
+      </div>
+
+
+      <div class="column " style="margin: 1em 0;">
+        <p class="cd-select icon">
+          <select class="people" onchange={{action 'selectExercise' value="target.value"}}>
+            {{#each exerciseModel as |oneExercise|}}
+              <option value={{oneExercise.name}} selected={{eq exercise oneExercise.name}}>
+                {{oneExercise.name}}
+              </option>
+            {{/each}}
+          </select>
+        </p>
+      </div>
+
+      <div class="field">
+        <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+
+
+{{/ui-modal}}

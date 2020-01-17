@@ -1,0 +1,171 @@
+<div class="ui button" {{action 'openModal'}}>
+  Add question
+</div>
+
+{{#ui-modal name="newQuestion" class="newQuestion"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Adding New Question
+  </div>
+  <div class="scrolling content">
+
+
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+      <div class="ui grid">
+        <div class="eleven wide column" style="margin: 1em 0;">
+          {{input class="chat" type="text" value = question placeholder="Question" required = true}}
+        </div>
+        <div class="five wide column" style="margin: 1em 0;">
+
+          {{#ui-dropdown class="selection" onChange=(action (mut type)) id="select"}}
+            <div class="default text">Multiple Choice</div>
+            <i class="dropdown icon" id="selectIcon"></i>
+            <div class="menu">
+              <div data-value="multipleChoice" class="item">Multiple Choice</div>
+              <div data-value="shortAns" class="item">Short Answer</div>
+              <div data-value="rating" class="item">Rating</div>
+              <div data-value="trueFalse" class="item">True/False</div>
+
+            </div>
+          {{/ui-dropdown}}
+        </div>
+      </div>
+
+
+{{#if rating}}
+  <div class="column " style="margin: 1em 0;">
+    {{input class="help" type="text" value = rhelp placeholder = "Help"}}
+  </div>
+  <div class="column " style="margin: 1em 0; text-align: center; padding-top: 1em">
+    {{ui-rating class="massive rating"
+      initialRating=rating
+      rating=rating
+      maxRating=7
+      onRate=(action (mut rating))}}
+  </div>
+{{/if}}
+
+{{#if shortAns}}
+  <div class="column " style="margin: 1em 0;">
+    {{input class="help"  type="text" value = sahelp placeholder = "Help"}}
+  </div>
+  <div class="column " style="margin: 1em 0;">
+    {{input id="disabled2" class="pencil" type="text" placeholder="Short answer text"}}
+  </div>
+{{/if}}
+
+{{#if trueFalse}}
+  <div class="column " style="margin: 1em 0;">
+    {{input class="help"  type="text" value = tfhelp placeholder = "Help"}}
+  </div>
+
+  <div>
+    <div class="ui grid" style="padding-left: 2.5em">
+      <div class="row" style="padding-top: 1em;padding-bottom: 0.5em">
+        <input type="radio" name="radio-button" id="cd-radio-1" checked>
+        <label for="cd-radio-1">Yes</label>
+      </div>
+      <div class="row" style="padding: 0.5em 0">
+        <input type="radio" name="radio-button" id="cd-radio-2">
+        <label for="cd-radio-2">No</label>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+
+{{#if multipleChoice}}
+
+  <div class="column " style="margin: 1em 0;">
+    {{input class="help" type="text" value = mchelp placeholder = "Help"}}
+  </div>
+
+  <div class="fourteen wide field">
+    <div class="column " style="margin: 1em 0;">
+      {{input class="circle" type="text" value = mcop1 placeholder = "Option 1" required=true}}
+    </div>
+
+    {{#if option2}}
+      <div class="ui grid">
+        <div class="fifteen wide column" style="margin: 1em 0;">
+          {{input class="circle" type="text" value = mcop2 placeholder = "Option 2" required=true}}
+        </div>
+        <div class="one wide column" style="    position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+          <i class="large times icon" {{action "removeOption"}}></i>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if option3}}
+      <div class="ui grid">
+        <div class="fifteen wide column" style="margin: 1em 0;">
+          {{input class="circle" type="text" value = mcop3 placeholder = "Option 3" required=true}}
+        </div>
+        <div class="one wide column" style="    position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+          <i class="large times icon" {{action "removeOption"}}></i>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if option4}}
+      <div class="ui grid">
+        <div class="fifteen wide column" style="margin: 1em 0;">
+          {{input class="circle" type="text" value = mcop4 placeholder = "Option 4" required=true}}
+        </div>
+        <div class="one wide column" style="    position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+          <i class="large times icon" {{action "removeOption"}}></i>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if option5}}
+      <div class="ui grid">
+        <div class="fifteen wide column" style="margin: 1em 0;">
+          {{input class="circle" type="text" value = mcop5 placeholder = "Option 5" required=true}}
+        </div>
+        <div class="one wide column" style="    position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+          <i class="large times icon" {{action "removeOption"}}></i>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if option6}}
+      <div class="ui grid">
+        <div class="fifteen wide column" style="margin: 1em 0;">
+          {{input class="circle" type="text" value = mcop6 placeholder = "Option 6" required=true}}
+        </div>
+        <div class="one wide column" style="position: relative;margin-top: 30px;left: -1%;color: rgba(230, 60, 60, 0.71);cursor: pointer;">
+          <i class="large times icon" {{action "removeOption"}}></i>
+        </div>
+      </div>
+    {{/if}}
+
+  </div>
+
+  <div class="fourteen wide field">
+    {{#if addable}}
+      <div class="ui grid">
+        <div class="fifteen wide column" {{action "addOption"}} style="margin: 1em 0;">
+           {{input id="disabled" class="circle" type="text" placeholder="Add Option"}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
+
+
+  <div class="field" style="padding-top: 2em">
+    <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+      Submit
+    </button>
+  </div>
+
+  </form>
+
+
+</div>
+{{/ui-modal}}

@@ -1,0 +1,61 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Client Questions</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="background" style="padding-left: 5em;padding-right: 5em;padding-top:  10em;">
+
+
+    <div class="ui very padded container segment" id="top" style="margin-top: -100px;">
+      <div class="ui grid" style="margin-top: -30px;">
+        <div class="left thirteen wide column" style="margin-top: -5px;">
+          <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+            Questions
+          </p>
+        </div>
+      </div>
+      <br><br><br><br>
+
+      <div class="ui left aligned seven wide column">
+      </div>
+
+
+      <div style="display: inline">
+        <table class="ui fixed table" style="border: none;border-color: white;">
+          <tbody >
+          <tr style="font-weight: bold;">
+            <th class="left aligned one wide column ">First Name</th>
+            <th class="left aligned one wide column ">Last Name</th>
+            <th class="left aligned one wide column ">Email</th>
+            <th class="left aligned two wide column ">Question</th>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div  id="myWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+        <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+          <tbody>
+          {{#each questionModel as |question|}}
+          <tr>
+              <th class="left aligned one wide column">{{question.firstName}}</th>
+              <th class="left aligned one wide column">{{question.lastName}}</th>
+              <th class="left aligned one wide column">{{question.email}}</th>
+              <th class="left aligned two wide column">{{question.comment}}</th>
+          </tr>
+            <br><br>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <br><br><br><br>
+</div>

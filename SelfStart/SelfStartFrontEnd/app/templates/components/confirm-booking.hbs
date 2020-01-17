@@ -1,0 +1,35 @@
+{{#ui-modal name= modalName class= modalName}}
+  <form class="cd-form floating-labels" {{action "save" on="submit"}}>
+    <br><br>
+    <fieldset>
+      <legend>Book Appointment</legend>
+      <label class="cd-label">Select Physiotherapist</label>
+      <p class="cd-select icon">
+      <p></p>
+      </p>
+
+      <div class="icon">
+        <label class="cd-label">Reason</label>
+        {{input class="star" type="text" value = Reason}}
+      </div>
+      <div class="icon">
+        <label class="cd-label">Other</label>
+        {{input  class="user" type="text" value = Other}}
+      </div>
+
+      <div class="icon">
+        <label class="cd-label">Date</label>
+
+      </div>
+
+      <div>
+        <div class="cd-button">
+          <input type="submit" value="Submit">
+        </div>
+
+        <button class="ui fluid negative button" {{action "cancelbookingappointment"}}>Cancel</button>
+      </div>
+    </fieldset>
+
+  </form>
+{{/ui-modal}}

@@ -1,0 +1,129 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">Manage Forms</span>
+      </h1>
+
+    </div>
+  </div>
+</div>
+
+<div class="ui container" style="padding-top: 2em">
+  <div class="ui top attached tabular stackable menu" style="padding-left: 20%;">
+    <a class="{{formState}} item" {{action "form"}}>
+      Forms
+    </a>
+    <a class="{{questionState}} item" {{action "question"}}>
+      Questions
+    </a>
+  </div>
+
+  <div class="ui segment" style="background: transparent;border: none;box-shadow: none;">
+  {{#if formView}}
+
+
+    <div class="ui very padded container segment" id="top">
+      <div class="ui grid" style="margin-top: -30px;">
+        <div class="left thirteen wide column" style="margin-top: -5px;">
+          <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+            Forms
+          </p>
+        </div>
+        <div class="right two wide column" style="padding-left: 30px;">
+          <a href="/admin/new-form" class="ui button">
+            Add form
+          </a>
+        </div>
+      </div>
+      <br><br><br><br>
+
+      <div class="ui left aligned seven wide column">
+        <div class="ui form" >
+          <div class="two fields" >
+
+            <div class="field">
+              {{#ui-dropdown class="selection" selected=queryPath onChange=(action (mut queryPath))}}
+                <div class="default text">{{modelAttributes.firstObject.name}}</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  {{#each modelAttributes as |attribute|}}
+                    <div class="item" data-value="{{attribute.key}}">
+                      {{attribute.name}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/ui-dropdown}}
+            </div>
+
+            <div class="field">
+              <div class="ui icon input">
+                <i class="search icon"></i>
+                {{input type="text" placeholder="Search..."  value=query }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <br>
+      <table class="ui fixed table" id="tb" style="border: none;border-color: white;">
+        <tbody>
+        <tr style="font-weight: bold;">
+          {{#each modelAttributes as |column|}}
+            <th class={{column.class}} {{action 'sortColumn' column.key column.dir}}>{{column.name}}
+              {{#if (eq column.dir 'asc')}}
+                <i class="sort ascending icon"></i>
+              {{/if}}
+              {{#if (eq column.dir 'desc')}}
+                <i class="sort descending icon"></i>
+              {{/if}}
+              {{#if (eq column.dir '')}}
+                <i class="sort icon"></i>
+              {{/if}}
+            </th>
+          {{/each}}
+          <th class="center aligned three wide  column">Actions</th>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="ui divider"></div>
+
+
+      <div  id="myWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+        <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+          <tbody >
+          {{#each formsModel as |form|}}
+
+            <tr>
+              {{#each modelAttributes as |column|}}
+                <td class={{column.class}}>
+                  {{get form column.key}}
+                </td>
+              {{/each}}
+
+              <td class="right aligned one wide column" style="padding-right: 0">
+                <p>{{display-questions model=form}}</p>
+
+              </td>
+              <td class="center aligned one wide column" style="padding-right: 0;padding-left: 0">
+                <a style="cursor: pointer; " title="Edit">
+                  {{#link-to 'admin.edit-form' form.id }}<img src="/assets/images/pencil.svg">{{/link-to}}
+                </a>
+              </td>
+              <td class="left aligned one wide column" style="padding-left: 0">
+                <p>{{delete-form ID=form.id flagDelete=flagDelete}}</p>
+              </td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  {{/if}}
+  {{#if questionView}}
+    {{manage-questions model=questionModel}}
+  {{/if}}
+</div>
+</div>

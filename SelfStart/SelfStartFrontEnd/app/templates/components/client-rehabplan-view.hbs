@@ -1,0 +1,108 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">{{planName}}</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<form class="cd-form floating-labels"  style="padding-right: 10em;padding-left: 10em;">
+  <div class="ui basic segment">
+
+    <div class="ui teal progress" id="example4">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
+      <div class="label">Progress</div>
+    </div>
+{{#if inExercise}}
+  <h1 class="ui header">{{counter}}. {{currentExercise.name}}</h1>
+  <h2 class="ui header">{{currentExercise.description}}</h2>
+  <!--image-->
+
+  <div class = "image" style="max-height:500px;min-height:500px;min-width:141.63px;">
+    {{#if currentImages}}
+      {{#slick-slider speed=500 autoplay=false arrows=true id=index pauseOnHover=true}}
+        {{#each currentImages as |Image|}}
+          <div class ="box">
+            <img style="max-height:500px;min-height: 500px;display: block;margin-left: auto;margin-right: auto;" src="{{Image.imageData}}">
+          </div>
+        {{/each}}
+      {{/slick-slider}}
+    {{else}}
+      {{#if isLoading}}
+        <div class="ui segment">
+          <div class="ui active dimmer">
+            <div class="ui text loader">Loading</div>
+          </div>
+          <p></p>
+        </div>
+      {{else}}
+        <div class ="box">
+          <img src="/assets/images/NoImagesSaved.jpg" style="max-height:500px;display: block;margin-left: auto;margin-right: auto;">
+        </div>
+
+      {{/if}}
+    {{/if}}
+  </div>
+  <h2 class="ui header">Steps</h2>
+  <div class="ui ordered list">
+    {{#each currentExercise.actionSteps as |actionstep|}}
+      <p class="item">
+        {{actionstep}}
+      </p>
+    {{/each}}
+  </div>
+
+  <h2 class="ui header"> duration </h2>
+  <h3 class="ui header">{{currentExercise.sets}} sets </h3>
+  <h3 class="ui header">{{currentExercise.reps}} repetition</h3>
+  <h3 class="ui header">{{currentExercise.duration}} minuets in total</h3>
+
+  <br>
+  <div class="ui buttons" style="float: left!important;">
+    {{#if isNFirst}}
+      <button class="ui right labeled icon button" {{action "prevExercise"}}>
+        <i class="left chevron icon"></i>
+        Previous
+      </button>
+    {{/if}}
+
+  </div>
+
+  <div class="ui buttons" style="float: right!important;">
+    {{#if isEnd}}
+      <button class="green ui right labeled icon button"{{action "finishRehabPlan"}}>
+        Done
+        <i class="stop icon"></i>
+      </button>
+    {{else}}
+      <button class="ui right labeled icon button" {{action "nextExercise"}}>
+        Next
+        <i class="right chevron icon"></i>
+      </button>
+    {{/if}}
+
+  </div>
+
+
+  <br>
+  <br>
+  {{else}}
+
+  {{get-assessment-results planID=rehabPlan.id}}
+  <button class="green ui button"{{action "Sendtests"}}>
+    SUBMIT
+  </button>
+{{/if}}
+
+
+
+
+
+  </div>
+
+
+</form>

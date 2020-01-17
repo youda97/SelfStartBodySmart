@@ -1,0 +1,32 @@
+<button class="ui mini circular labeled icon green button" {{action 'openModal'}}>
+  <i class="remove icon"></i>
+  Add Assessment Test
+</button>
+
+
+{{#ui-modal name= modalName class= modalName}}
+  <div class='content'>
+    <div class='ui form'>
+      {{!-- <h2> {{fName}} </h2> --}}
+      <div class="ui grid">
+        {{#each formsModel as |form|}}
+          <div class="four wide column">
+            <label>{{form.name}}</label>
+          </div>
+
+          <div class="four wide column">
+            <button {{action "AddTest" form patient}}>Add </button>
+          </div>
+
+        {{/each}}
+      </div>
+
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui positive right labeled icon button">
+      Done
+    </div>
+  </div>
+  <br><br>
+{{/ui-modal}}

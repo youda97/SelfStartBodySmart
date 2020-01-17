@@ -1,0 +1,52 @@
+{{!--<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/home-style.css">
+--}}
+<!--<style>-->
+<!--.ui.visible.left.sidebar ~ .fixed,-->
+<!--.ui.visible.left.sidebar ~ .pusher {-->
+<!---webkit-transform: translate3d(260px, 0, 0); transform: translate3d(260px, 0, 0);-->
+<!--}-->
+<!--</style>-->
+
+{{#if show}}
+
+<div id="example" class="index">
+
+
+  <div class="full height">
+    <div class="following bar">
+      <div class="ui container">
+
+        <div class="ui large secondary network menu inverted">
+          <div class="item">
+            <div class="ui logo shape">
+              <div class="sides">
+                <div class="active ui side">
+                  {{#link-to 'practitioner'}}
+                    <img class="ui image selfStart" src="/assets/images/home/Header.png">
+                  {{/link-to}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right menu inverted">
+            {{!-- <a href="/practitioner/askATherapist" class="item">Ask a Therapist</a> --}}
+            <a href="/practitioner/clients" class="item">Clients</a>
+            <a href="/practitioner/ask-a-therapist" class="item">Ask A Therapist</a>
+            <a  href="/practitioner/exercises"class="item">Exercise</a>
+            <a  href="/practitioner/rehabplans"class="item">Menu Builder</a>
+            <a href="/practitioner/appointment" class="item">Appointments</a>
+            {{#link-to 'home'}}
+            <a class="item" {{action "logout"}} style="margin-top: 28px">Logout</a>
+            {{/link-to}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{yield}}
+
+
+  </div>
+</div>
+{{/if}}

@@ -1,0 +1,151 @@
+<a href="/register"class="ui large inverted download button" {{action 'openModal'}}>
+  Register
+</a>
+
+
+<link integrity="" rel="stylesheet" href="{{rootURL}}assets/css/home-style.css">
+
+
+
+{{#ui-modal name="register" class="register"}}
+
+
+  <i {{action "close"}}class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    <div class = "inline fields">
+    <div class = "field">Register</div>
+    <div style=" font-size: 18px; color: red; text-align: center; text-decoration: underline;" class = "field">{{errorMessage}} </div>
+    </div>
+    {{!-- <p style="color: red; text-align: center;  text-decoration: underline; padding-top: 65px">{{errorMessage}}</p> --}}
+  </div>
+  <div class="scrolling content">
+
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+       <legend>Account Information</legend>
+          <div class="ui hidden divider"></div>
+          <div class="field" style="margin: 1em 0;">
+            {{input class="email" type="email" value =email placeholder="email" required=true}}
+          </div>
+          <div class="field" style="margin: 1em 0;">
+            {{input class="lock" type ="password" value=encryptedPassword placeholder="Password" required=true}}
+          </div>
+          <div class="field" style="margin: 1em 0;">
+            {{input class="lock" type ="password" value=confirmPassword placeholder="Confirm Password" required=true}}
+          </div>
+
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+
+          <legend>Personal Information</legend>
+          <div class="ui hidden divider"></div>
+          <div class="ui two column grid">
+              <div class="column " style="margin: 1em 0;">
+                {{input class="user" type="text" value=givenName placeholder="First Name" required=true}}
+              </div>
+              <div class="column " style="margin: 1em 0;">
+                {{input class="user" type="text" value=familyName placeholder="Last Name" required=true}}
+              </div>
+          </div>
+
+          <div class="ui two column grid">
+            <div class="column " style="margin: 1em 0;">
+              <input class="date" type="date" value={{selectedDate}}  onchange={{action 'assignDate' value="target.value"}} required=true>
+            </div>
+            <div class="column " style="margin: 1em 0;">
+              <p class="cd-select icon">
+                <select class="people" onchange={{action 'selectGender' value="target.value"}} required=true>
+                  <option selected="selected">
+                    Select Gender
+                  </option>
+                  {{#each genderModel as |oneGender|}}
+                    <option value={{oneGender.name}} selected={{eq gender oneGender.name}} >
+                      {{oneGender.name}}
+                    </option>
+                  {{/each}}
+                </select>
+              </p>
+            </div>
+          </div>
+
+          <div class="field" style="margin: 1em 0;">
+            {{input class="phone" type="text" value=phoneNumber placeholder="Phone Number" required=true}}
+          </div>
+
+           <div class="field" style="margin: 1em 0;">
+            {{input class = "chat" type="text" value=skype placeholder="Skype Username" required=true}}
+          </div>
+
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+
+          <legend>Address</legend>
+          <div class="ui hidden divider"></div>
+
+          <div class="ui two column grid">
+            <div class="column " style="margin: 1em 0;">
+              {{input class="home" type="text" value=streetNumber placeholder="Street Number" required=true}}
+            </div>
+            <div class="column " style="margin: 1em 0;">
+              {{input class="home" type="text" value=streetName placeholder="Street Name" required=true}}
+            </div>
+          </div>
+
+          <div class="ui two column grid">
+            <div class="column " style="margin: 1em 0;">
+              {{input class="home" type="text" placeholder="Unit Number" value = apartment}}
+            </div>
+            <div class="column " style="margin: 1em 0;">
+              {{input class="flag" type="text" value=postalCode placeholder="Postal/Zip Code" required=true}}
+            </div>
+          </div>
+
+          <div class="ui three column grid" id="grid">
+            <div class="column " style="margin: 1em 0;">
+              {{#ui-dropdown class="address selection" onChange=(action (mut country)) id="countrySelect"}}
+                <div class="default text">Select a country</div>
+                <i class="dropdown icon" id="selectIcon"></i>
+                <div class="menu">
+                  {{#each model as |country|}}
+                    <div data-value="{{country.id}}" class="item">
+                      {{country.name}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/ui-dropdown}}
+            </div>
+            <div class="column " style="margin: 1em 0;">
+              {{#ui-dropdown class="address selection " onChange=(action (mut province)) id="provinceSelect"}}
+                <div class="default text">Select a province</div>
+                <i class="dropdown icon" id="selectIcon"></i>
+                <div class="menu">
+                  {{#each provModel as |province|}}
+                    <div data-value="{{province.id}}" class="item">
+                      {{province.name}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/ui-dropdown}}
+            </div>
+            <div class="column " style="margin: 1em 0;">
+              {{input class="world" type="text" value=city placeholder="City" }}
+            </div>
+          </div>
+
+      <div class="field" style="margin-top: 1em;">
+            <p>By creating an account you agree to our <a style="color: blue; cursor: pointer; text-decoration: underline;">Terms & Privacy.</a></p>
+            <br>
+          </div>
+
+      <div class="field">
+        <button class="fluid ui blue button" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+{{/ui-modal}}

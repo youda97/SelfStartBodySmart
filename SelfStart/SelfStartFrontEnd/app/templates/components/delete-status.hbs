@@ -1,0 +1,19 @@
+<p style="cursor: pointer;" {{action 'openModal' }}
+   title="Delete"><i class="red remove icon"></i>
+</p>
+
+{{#ui-modal name= modalName class=modalName }}
+  <div class="ui icon header">
+    Please Confirm ...
+  </div>
+  <div class="content">
+    <p>Are you sure you need to delete this element?</p>
+  </div>
+  <br>
+
+  <div class="actions" style="padding:0">
+    <div class="ok " style="float:left; width: 50%; cursor: pointer; background: #fc7169; color:white; text-align: center;">Yes</div>
+    <div class="cancel " style="float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">No</div>
+
+  </div>
+{{/ui-modal}}

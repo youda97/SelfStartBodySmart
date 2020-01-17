@@ -1,0 +1,22 @@
+
+  <form class="cd-form floating-labels" {{action "save" on="submit"}} style="padding-right: 10em; padding-left: 10em">
+    <br><br>
+
+
+  </form>
+
+  {{as-calendar
+    title="View Schedule"
+    occurrences=occurrences
+    defaultTimeZoneQuery="Toronto|New York"
+    dayStartingTime="8:00"
+    dayEndingTime="20:00"
+    timeSlotDuration="00:30"
+    onAddOccurrence=(action "calendarAddOccurrence")
+    onUpdateOccurrence=(action "calendarUpdateOccurrence")
+    onRemoveOccurrence=(action "calendarRemoveOccurrence")}}
+
+
+  <button class="ui button" {{action 'save'}}>
+    Save
+  </button>

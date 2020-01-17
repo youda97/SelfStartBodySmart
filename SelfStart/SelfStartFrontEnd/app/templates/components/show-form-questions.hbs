@@ -1,0 +1,35 @@
+<button class="ui mini circular labeled icon green button" {{action 'openModal'}}>
+  Change Order
+</button>
+
+
+{{#ui-modal name= modalName class= modalName}}
+  <h3>Questions: </h3>
+  <br><br><br>
+  {{#each questions as |oneQuestion|}}
+    <div class="ui grid">
+      <div class="fourteen wide column">
+        <li>  {{oneQuestion.questionText}} </li>
+        <br>
+        <div class="two wide column right aligned">
+          <button class="ui mini circular labeled icon red button"{{action 'removeQuestion' oneQuestion thisForm oneQuestion.id thisForm.id}}><i class="remove icon"></i>Remove</button>
+          <p class="cd-select icon">
+            <select class="world" onchange={{action 'orderChange' oneQuestion thisForm thisForm.id}}>
+              {{#each questions as |q index|}}
+                <option value = {{index}} selected={{is-equal oneQuestion q}}>
+                  {{index-plus-one index}}
+                </option>
+              {{/each}}
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+  {{/each}}
+  <div class="actions">
+    <div class="ui positive right labeled icon button" {{action 'save' thisForm thisForm.id}}>
+      Done
+    </div>
+  </div>
+{{/ui-modal}}

@@ -1,0 +1,34 @@
+<br>
+<div id="content">
+  {{add-image flagAdd=flagAdd disabled=disabled}}
+
+  <br><br><br>
+
+  <div class="ui container">
+    <table class="ui single line table">
+      <thead>
+      <tr>
+        <th class="seven wide">Image Name</th>
+        <th class="seven wide">Image</th>
+        <th class="two wide">Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {{#each bookingPhotos as |Image|}}
+        <tr>
+          <td>{{Image.name}}</td>
+          <td>
+            <img class = "ui small image" src="{{Image.imageData}}">
+          </td>
+          <td>
+            {{delete-image ID=Image.id flagDelete=flagDelete}}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+    <br><br><br>
+  </div>
+</div>
+

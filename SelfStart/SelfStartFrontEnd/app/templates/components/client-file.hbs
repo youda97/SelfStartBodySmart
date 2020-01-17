@@ -1,0 +1,462 @@
+<div class="masthead segment bg2">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header">
+        <span class="library" style="font-size: 1.25em">{{model.givenName}} {{model.familyName}}</span>
+      </h1>
+
+    </div>
+  </div>
+</div>
+
+<div class="ui container" style="padding-top: 4em">
+  <div class="ui top attached tabular stackable menu" style="padding-left: 25%;">
+
+    <a class="{{assessState}} item" {{action "assessView"}}>
+      Assessment
+    </a>
+    <a class="{{reportState}} item"  {{action "reportView"}}>
+      Reports
+    </a>
+    <a class="{{photoState}} item"  {{action "photoView"}}>
+      Photos
+    </a>
+    <a class="{{menusState}} item" {{action "menusView"}}>
+      Menus
+    </a>
+    <a class="{{accountingState}} item" {{action "accountingView"}}>
+      Accounting
+    </a>
+  </div>
+  <div class="ui segment" style="background: transparent;border: none;box-shadow: none;">
+
+    {{#if menus}}
+
+      <div class="ui very padded container segment" id="top">
+        <div class="ui grid" style="margin-top: -30px;">
+          <div class="left twelve wide column" style="margin-top: -5px;">
+            <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+              Menu Builder
+            </p>
+          </div>
+          <div class="right three wide column" style="padding-left: 30px;">
+            {{!--{{add-rehabplan flagAdd=flagAdd}}--}}
+            <div class="ui form" >
+              {{#ui-dropdown class="selection" onChange=(action (mut plan))}}
+                <div class="default text">Select a menu</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  {{#each rehabModel as |plan|}}
+                    <div data-value="{{plan.id}}" class="item">
+                      {{plan.planName}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/ui-dropdown}}
+
+            </div>
+          </div>
+        </div>
+        <br><br><br><br>
+        <div style="display: inline">
+          <table class="ui fixed table" style="border: none;border-color: white;">
+            <tbody >
+            <tr style="font-weight: bold;">
+              {{#each modelAttributes as |column|}}
+                <th class={{column.class}} {{action 'sortColumn' column.key column.dir}}>{{column.name}}
+                  {{#if (eq column.dir 'asc')}}
+                    <i class="sort ascending icon"></i>
+                  {{/if}}
+                  {{#if (eq column.dir 'desc')}}
+                    <i class="sort descending icon"></i>
+                  {{/if}}
+                  {{#if (eq column.dir '')}}
+                    <i class="sort icon"></i>
+                  {{/if}}
+                </th>
+              {{/each}}
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div  id="myWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+          <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+            <tbody >
+            {{#each listModel as |exercise|}}
+
+              <tr>
+                {{#each modelAttributes as |column|}}
+                  <td class={{column.class}}>
+                    {{get exercise column.key}}
+                  </td>
+                {{/each}}
+              </tr>
+            {{/each}}
+
+            {{#if isPlanSelected}}
+              <div class="ui {{disabled}} button" {{action "openModal"}}>
+                Assign
+              </div>
+            {{/if}}
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if photo}}
+      <table class="ui single line table">
+        <thead>
+        <tr>
+          <th>Image Name</th>
+          <th>Image</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each imageList as |Image|}}
+          <tr>
+            <td>{{Image.name}}</td>
+            <td>
+              <img class = "ui extra large image" src="{{Image.imageData}}">
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
+
+
+    {{#if reports}}
+
+      <div class="ui very padded container segment" id="top">
+        <div class="ui grid" style="margin-top: -30px;">
+          <div class="left twelve wide column" style="margin-top: -5px;">
+            <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">
+              Reports
+            </p>
+          </div>
+        </div>
+        <br><br><br><br>
+
+        <div style="display: inline">
+          <table class="ui fixed table" style="border: none;border-color: white;">
+            <tbody >
+            <tr style="font-weight: bold;">
+              <th class="left aligned five wide column">
+                Report Type
+              </th>
+              <th class="center aligned one wide column">
+                Actions
+              </th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ui divider"></div>
+
+
+          <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+            <tbody>
+            <tr>
+              <td class="left aligned five wide column">
+                Feedback Report
+              </td>
+              <td class="center aligned one wide column">
+                <p style="cursor: pointer; " title="View Form"  {{action 'openFeedback' }}>
+                  <img src="/assets/images/eye-19.svg">
+                </p>
+              </td>
+            </tr>
+
+            <br><br>
+            <tr>
+              <td class="left aligned five wide column=">
+                Summary Report
+              </td>
+              <td class="center aligned two wide column">
+                <p style="cursor: pointer; " title="View Form"  {{action 'openSummary' }}>
+                  <img src="/assets/images/eye-19.svg">
+                </p>
+              </td>
+            </tr>
+
+            <br><br>
+            <tr>
+              <td class="left aligned five wide column">
+                Data Report
+              </td>
+              <td class="center aligned two wide column">
+                <p style="cursor: pointer; " title="View Form"  {{action 'openData' }}>
+                  <img src="/assets/images/eye-19.svg">
+                </p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+      </div>
+    {{/if}}
+    {{#if accountingmenus}}
+      <div class="ui very padded container segment" id="top">
+        <div class="ui grid" style="margin-top: -30px;">
+          <div class="left five wide column" style="margin-top: -5px;">
+            <p style="padding-top: 13px;color:  white;font-size: 1.5em;font-weight: bolder;">Trasnactions</p>
+          </div>
+          <div class="right three wide column" style="padding-left: 30px; margin-top: -5px;">
+            <p>remaining: </p>
+          </div>
+          <td class="right aligned one wide column ">
+            <p style="cursor: pointer; " title="Edit">
+              <img src="/assets/images/pencil.svg">
+            </p>
+          </td>
+
+        </div>
+        <br><br><br><br>
+
+
+        <div style="display: inline">
+          <table class="ui fixed table" style="border: none;border-color: white;">
+            <tbody >
+            <tr style="font-weight: bold;">
+              <th> test </th>
+              <th> test2 </th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div  id="myWindow" style="height:500px; overflow-y: scroll; overflow-x: hidden;">
+          <table class="ui fixed table" id="tb" style="margin: 0 0;border: none;">
+            <tbody >
+            {{#each listModel as |exercise|}}
+
+
+              <tr>
+
+                {{#each modelAttributes as |column|}}
+
+                  <td class={{column.class}}>
+                    {{get exercise column.key}}
+                  </td>
+                {{/each}}
+              </tr>
+            {{/each}}
+
+            {{#if isPlanSelected}}
+              <div class="ui {{disabled}} button" {{action "openModal"}}>
+                Assign
+              </div>
+            {{/if}}
+
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    {{/if}}
+
+    {{#if assess}}
+      {{assessment-table model=model}}
+    {{/if}}
+
+  </div>
+</div>
+<br><br><br><br>
+
+{{#ui-modal name=modalName class=modalName }}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="ui icon header">
+    Assign {{plansData.planName}}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to assign this rehabilitation plan?</p>
+  </div>
+  <br>
+  {{list-forms rehabPlan = plan patient = model}}
+  <div class="actions" style="padding:0">
+
+    <div class="ok " style="padding:.6em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Yes</div>
+    <div class="cancel " style="padding:.6em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">No</div>
+  </div>
+{{/ui-modal}}
+
+{{#ui-modal name="feedback" class="feedback"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Feedback Report
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels">
+
+
+      <h4>Summarise examination findings</h4>
+      <div class="field" style="margin: 1em 0;">
+        {{textarea class="message" type="text"}}
+      </div>
+
+      <h4>Summarise treatment plan</h4>
+      <div class="field" style="margin: 1em 0;">
+        {{textarea class="message" type="text"}}
+      </div>
+    </form>
+  </div>
+
+  <div class="actions" style="padding:0">
+    <div class="ok" style="padding:1em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Save Report</div>
+    <div class="cancel" style="padding:1em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">Exit</div>
+  </div>
+
+
+{{/ui-modal}}
+
+{{#ui-modal name="summary" class="summary"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="/assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Summary Report
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels">
+
+
+      <legend>Patient information</legend>
+
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">Name: </p> {{model.givenName}} {{model.familyName}}
+      </div>
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">Date of birth: </p> {{date-to-string date=model.dateOfBirth}}
+      </div>
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">Gender: </p>  {{model.gender}}
+      </div>
+      <div class="field" style="margin: 1em 0;">
+        <div class="field" style="margin: 1em 0;">
+          <p style="display: inline; font-weight: bold">Address: </p>  {{model.streetNumber}} {{model.streetName}} {{#if model.apartment}}, #{{model.apartment}} {{/if}}
+        </div>
+
+      </div>
+
+
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">Email: </p> {{model.email}}
+      </div>
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">Phone: </p> {{model.phoneNumber}}
+      </div>
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <legend>Treatments</legend>
+      <div class="ui hidden divider"></div>
+      {{#each patientModel as |link|}}
+        <div class="field" style="margin: 1em 0;">
+          {{link.RehabilitationPlan.planName}}
+        </div>
+      {{/each}}
+
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <legend>Appointment History</legend>
+      <div class="ui hidden divider"></div>
+      {{appointmentModel}}
+      {{#each appointments as |app|}}
+        <div class="field" style="margin: 1em 0;">
+          <p style="display: inline; font-weight: bold">Reason: </p> {{app.reason}}
+        </div>
+        <div class="field" style="margin: 1em 0;">
+          <p style="display: inline; font-weight: bold">Time: </p> {{app.date}}-{{app.endDate}}
+        </div>
+      {{/each}}
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <legend>Payment History</legend>
+      <div class="ui hidden divider"></div>
+      {{#each model.transactions as |transaction|}}
+        <div class="field" style="margin: 1em 0;">
+          <p style="display: inline; font-weight: bold">Date: </p> {{transaction.date}}
+        </div>
+        <div class="field" style="margin: 1em 0;">
+          <p style="display: inline; font-weight: bold">Price: </p> ${{transaction.amount}}
+        </div>
+      {{/each}}
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <label>Final Outcomes</label>
+      <div class="ui hidden divider"></div>
+
+      {{textarea type="text"}}
+
+    </form>
+    </div>
+
+
+
+  <br>
+
+  <div class="actions" style="padding:0">
+
+    <div class="ok" style="padding:1em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Save Report</div>
+    <div class="cancel" style="padding:1em; float:left; width: 50%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">Exit</div>
+  </div>
+
+
+{{/ui-modal}}
+
+{{#ui-modal name="data" class="data"}}
+
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Data Report
+  </div>
+  <div class="scrolling content">
+
+    <form id="edit" class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+
+      <legend>Questions</legend>
+      {{questionModel}}
+      {{#each ratingQuestions as |q|}}
+      <div class="field" style="margin: 1em 0;">
+        <p style="display: inline; font-weight: bold">{{q.questionText}} </p> {{display-data-report question=q}}
+      </div>
+      {{/each}}
+    </form>
+  </div>
+
+  <div class="actions" style="padding:0">
+
+    {{!-- <div class="ok" style="padding:.6em; float:left; width: 50%; cursor: pointer; background: #35a785; color:white; text-align: center;">Save Report</div> --}}
+    <div class="cancel" style="padding:.6em; float:left; width: 100%;  cursor: pointer; background: #b6bece; color:white; text-align: center;">Exit</div>
+  </div>
+
+{{/ui-modal}}

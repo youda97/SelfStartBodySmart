@@ -1,0 +1,77 @@
+<div class="ui fluid  button" {{action 'openModal'}}>
+  Add practitioner
+</div>
+
+{{#ui-modal name="newPhysio" class="newPhysio"}}
+  <i class="close icon"></i>
+  <link integrity="" rel="stylesheet" href="{{rootURL}}../assets/css/form-style.css"> <!-- Resource style -->
+
+  <div class="header">
+    Adding New Practitioner
+  </div>
+  <div class="scrolling content">
+
+    <form class="cd-form floating-labels" {{action "submit" on="submit"}}>
+
+
+      <legend>Account Settings</legend>
+      <div class="field" style="margin: 1em 0;">
+        {{input class="email" type="email" value = email placeholder="Email" required = true}}
+      </div>
+      <div class="field" style="margin: 1em 0;">
+        {{input class="lock" type="text" value = encryptedPassword placeholder="Temperary password" required = true}}
+      </div>
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <legend>Personal Info</legend>
+
+      <div class="ui hidden divider"></div>
+      <div class="ui two column grid">
+        <div class="column " style="margin: 1em 0;">
+          {{input class="user" type="text" value = givenName placeholder="First name" required = true}}
+        </div>
+        <div class="column " style="margin: 1em 0;">
+          {{input class="user" type="text" value = familyName placeholder="Last Name" required = true}}
+        </div>
+      </div>
+
+      <div class="ui two column grid">
+        <div class="column " style="margin: 1em 0;">
+          <input class="date" type="date" placeholder="Date of hire" value= {{selectedHiredDate}}  onchange={{action 'assignHiredDate' value="target.value"}} required>
+        </div>
+
+        <div class="column " style="margin: 1em 0;">
+
+          {{#ui-dropdown class="gender selection" onChange=(action (mut gender))}}
+            <div class="default text">Select a gender</div>
+            <i class="dropdown icon" id="selectIcon"></i>
+            <div class="menu">
+              {{#each genderModel as |oneGender|}}
+                <div data-value="{{oneGender.name}}" class="item">
+                  {{oneGender.name}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+
+        </div>
+      </div>
+
+      <div class="field" style="margin: 1em 0;">
+        {{input class="phone" type="text" value = phoneNumber placeholder="Phone number" required = true}}
+      </div>
+
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <div class="field">
+        <button class="fluid ui blue button" value="submit" style="max-width: 100%; height: 50px;">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+{{/ui-modal}}
